@@ -4,78 +4,78 @@
 # Change log
 
 
-| **Version** | **Date**   | **Changes**                                                           |
-| ----------- | ---------- | --------------------------------------------------------------------- |
-| 1.0.0       | 2023/02/03 | Basic scan result callback and settings.                              |
-| 1.0.3       | 2023/02/12 | Add API.                                                              |
-| 1.0.4       | 2023/02/27 | Add suspend and resume API.                                           |
-| 1.0.6       | 2023/03/09 | Add version info, loopscan, multibarcodes and precise scan about API. |
-| 1.0.7       | 2023/03/10 | Add API to support config aimer and illume light work mode.           |
-| 1.0.8       | 2023/03/13 | Fixed SDK version in docs.                                            |
-| 1.0.9       | 2023/03/14 | Add API to support license acive and license state query.             |
-| 1.1.0       | 2023/03/15 | Add API to support get scan service status.                           |
-| 1.1.2       | 2023/04/03 | Add API to support get the latest decode image.                       |
-| 1.1.3       | 2023/04/11 | Add API to support set suffix2 and prefix2.                           |
+| **Version** | **Date**   | **Changes**                                                                                                                                                                                     |
+|-------------| ---------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.0.0       | 2023/02/03 | Basic scan result callback and settings.                                                                                                                                                        |
+| 1.0.3       | 2023/02/12 | Add API.                                                                                                                                                                                        |
+| 1.0.4       | 2023/02/27 | Add suspend and resume API.                                                                                                                                                                     |
+| 1.0.6       | 2023/03/09 | Add version info, loopscan, multibarcodes and precise scan about API.                                                                                                                           |
+| 1.0.7       | 2023/03/10 | Add API to support config aimer and illume light work mode.                                                                                                                                     |
+| 1.0.8       | 2023/03/13 | Fixed SDK version in docs.                                                                                                                                                                      |
+| 1.0.9       | 2023/03/14 | Add API to support license acive and license state query.                                                                                                                                       |
+| 1.1.0       | 2023/03/15 | Add API to support get scan service status.                                                                                                                                                     |
+| 1.1.2       | 2023/04/03 | Add API to support get the latest decode image.                                                                                                                                                 |
+| 1.1.3       | 2023/04/11 | Add API to support set suffix2 and prefix2.                                                                                                                                                     |
+| 1.1.8       | 2024/05/16 | Add API to support set custom BroadcastReceiver, Disable/Enable Scan button, Export/Import configuration file, Configure barcode output failure event notification, Configure flash brightness. |
+| 1.1.9       | 2024/08/26 | Add API to support set/get properties for the EAN13/Matrix25/UPCA symbology                                                                                                                     |
 
-# Config Maven
-
-> Config Maven
-
-```
-    maven {
-        allowInsecureProtocol = true
-        url "http://47.108.228.164:8081/nexus/service/local/repositories/releases/content/"
-    }
-```
-
-**Note:** maven is configuared in _build.gradle_ usually, but also may be in your _settings.gradle_.
-
-# Config Dependencies
-
-> Config your project build.gradle, as following example:
-
-```
-    implementation('com.xcheng:scanner:1.1.3')
-```
-
-It is  recommended to use the latest version of SDK.
 
 # Basic function
 
 ## SDK initialize
 
-After init SDK, you can use scan function provided by scan service via APIs.
+After init SDK, you can use scan function provided by scan service via APIs.Currently, there are two ways to initialize SDK：
 
 ```java
-    XcBarcodeScanner.init(Context context, ScannerResult scannerResult)
+ XcBarcodeScanner.init(Context context, ScannerResult scannerResult)
+
+ XcBarcodeScanner.init(Context context, ScannerSymResult scannerSymResult)
 ```
 
-> Callback interface
+Callback interface：
 
 ```java
     public interface ScannerResult {
-        void onResult(String result);
+        void onResult(String result); 
+    }
+
+    public interface ScannerSymResult {
+        void onResult(String sym, String barCode);
     }
 ```
 
-After init SDK, your application will connect with scan service, and the scan result will be output via the _ScannerResult_ callback.
+After init SDK, your application will connect with scan service, and the scan result will be output via the ScannerResult/ScannerSymResult callback.
 
 Sample code:
 
 ```java
-                    XcBarcodeScanner.init(this, new ScannerResult() {
-                        @Override
-                        public void onResult(String result) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Log.d(TAG, "result: " + result);
-                                    TextView resultTextView = findViewById(R.id.textview_result);
-                                    resultTextView.setText(result);
-                                }
-                            });
-                        }
-                    });
+        XcBarcodeScanner.init(this, new ScannerResult() {
+            @Override
+            public void onResult(String result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        allResult = allResult + "\n" + result;
+                        mTextResult.setText(allResult);
+                        scrollToBottom();
+                    }
+                });
+            }
+        });
+
+        XcBarcodeScanner.init(this, new ScannerSymResult() {
+            @Override
+            public void onResult(String sym, String barCode) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        allResult = allResult + "\n" + sym + ":" + barCode;
+                        mTextResult.setText(allResult);
+                        scrollToBottom();
+                    }
+                });
+            }
+        });
 ```
 
 ## SDK deinitialize
@@ -122,8 +122,7 @@ Use the following API to active license if needed.
     XcBarcodeScanner.activateLicense();
 ```
 
-After active license, it need about 1 or 2 minutes to process.
-We can use the API *getLicenseState* to query license status.
+After active license, it need about 1 or 2 minutes to process. We can use the API *getLicenseState* to query license status.
 
 **Note:** Active license need network connection.
 
@@ -226,7 +225,7 @@ Sample code:
 
 ```java
     XcBarcodeScanner.enableBarcodeType(BarcodeType.QRCODE, true); // Enable QRCode support.
-    XcBarcodeScanner.enableBarcodeType(BarcodeType.QRCODE, false);// Disable QRCode support.
+    XcBarcodeScanner.enableBarcodeType(BarcodeType.QRCODE, false); // Disable QRCode support.
 ```
 
 ## Check specific type of barcode support status
@@ -272,7 +271,7 @@ Use the following API to config type of notification when scan success.
     XcBarcodeScanner.setSuccessNotification(String notification);
 ```
 
-All types of notifications defined in the class  NotificationType.
+All types of notifications defined in the class NotificationType.
 
 ```java
     public class NotificationType {
@@ -422,8 +421,8 @@ Sample code:
 Use the following API to config suffix of barcode result.
 
 ```java
-    XcBarcodeScanner.setTextSuffix(String suffix);
-    XcBarcodeScanner.setTextSuffix2(String suffix2);
+    XcBarcodeScanner.setTextSuffix(String prefix);
+    XcBarcodeScanner.setTextSuffix2(String prefix2);
 ```
 
 Sample code:
@@ -439,13 +438,13 @@ Sample code:
 Use the following API to config interval of loopscan.
 
 ```java
-    setLoopScanInterval(int ms);
+setLoopScanInterval(int ms);
 ```
 
 Sample code:
 
 ```java
-    XcBarcodeScanner.setLoopScanInterval(100); // Config interval of loopscan as 100 ms.
+XcBarcodeScanner.setLoopScanInterval(100); // Config interval of loopscan as 100 ms.
 ```
 
 ## Get running status of loopscan
@@ -507,7 +506,7 @@ Sample code:
 
 Note: if the numberOfBarcodes been set to 1, it is single barcode mode, the fixedNumber option is meaningless.
 
-## Config region size of  barcode scan
+## Config region size of barcode scan
 
 Use the following API to config the region size of barcode scanning. the typical usage is 1D barcode precise scanning.
 
@@ -515,7 +514,7 @@ Use the following API to config the region size of barcode scanning. the typical
     void setScanRegionSize(int regionSize);
 ```
 
-All supported  region size defined in class RegionSizeType:
+All supported region size defined in class RegionSizeType:
 
 ```java
     public class RegionSizeType {
@@ -560,7 +559,7 @@ import com.tools.XCImage;
 
 public void getLastImage() {
     XCImage lastImg=XcBarcodeScanner.getLastDecodeImage();
-  
+    
     if(lastImg!=null){
         String infoStr="Witdh: "+lastImg.getWidth()+", Height: "+lastImg.getHeight()+", Stride: "+lastImg.getStride()+", size: "+lastImg.getData().length+" Bytes";
         showAlertDialog("Image Info:",infoStr,false,"OK",null);
@@ -569,3 +568,252 @@ public void getLastImage() {
     }
 }
 ```
+
+## Set custom BroadcastReceiver
+
+Use the following API to configure the Action and Key for custom broadcasts. After successful configuration, the scan result can be received through the broadcast.
+
+```java
+void setScanResultBroadcast(String action, String resultKey);
+```
+
+Sample code:
+
+```java
+XcBarcodeScanner.setScanResultBroadcast("xxx.Action", "scanResultKey");
+```
+
+## Disable/Enable Scan button
+
+Due to differences in device design, the currently supported scanning buttons are: left side scanning button/right side scanning button/front scanning button/handheld handle scanning button. After disabling the scanning button function, pressing the scanning button will prevent scanning; After enabling the scanning button function, the button will restore the scanning function.
+
+```java
+void setFrontScanKeyEnable(boolean isEnable); // front scanning button
+
+void setLeftScanKeyEnable(boolean isEnable); // left side scanning button
+
+void setRightScanKeyEnable(boolean isEnable); // right side scanning button
+
+void setPoGoScanKeyEnable(boolean isEnable); // handheld handle scanning button
+```
+
+Sample code:
+
+```java
+XcBarcodeScanner.setFrontScanKeyEnable(false); // Disable front scanning button
+
+XcBarcodeScanner.setFrontScanKeyEnable(true); // Enable front scanning button
+```
+
+## Export configuration file
+
+Export the currently used configuration file to the specified directory.
+
+```java
+XcBarcodeScanner.exportSettings(String exportPath);
+```
+
+The format of the exported file must be of XML type, and the file name can only contain letters and numbers.Sample code:
+
+```java
+String exportPath = Environment.getExternalStorageDirectory().getPath() + "/Scanner.xml";
+// Export the configuration file to sdcard and rename it to Scanner.xml
+XcBarcodeScanner.exportSettings(exportPath);  
+```
+
+## Import configuration file
+
+You can use the configuration files in the specified directory through the interface provided by the SDK.
+
+```java
+XcBarcodeScanner.importSettingsByProfileName(String profileName, String importPath);
+```
+
+**Note:** The configuration file name can only contain letters and numbers. And **the configuration file must be exported through the "XcBarcodeScanner. exportSettings" interface.**
+
+Sample code:
+
+```java
+String fileName = "Scanner";   // The file name cannot contain type suffix
+String importPath = Environment.getExternalStorageDirectory().getPath() + "/Scanner.xml";
+XcBarcodeScanner.importSettingsByProfileName(fileName, importPath);
+```
+
+## Configure barcode output failure event notification
+
+Use the following API to config type of notification when scan failed.
+
+```java
+XcBarcodeScanner.setFailNotification(String notification);
+```
+
+All types of notifications defined in the class NotificationType.
+
+```java
+public class NotificationType {
+    public static final String MUTE = "Mute";
+    public static final String SOUND = "Sound";
+    public static final String VIBRATOR = "Vib";
+    public static final String SOUND_VIBRATOR = "Sound/Vib";
+}
+```
+
+Sample code:
+
+```
+XcBarcodeScanner.setFailNotification(NotificationType.MUTE); 
+XcBarcodeScanner.setFailNotification(NotificationType.SOUND);
+```
+
+## Configure flash brightness
+
+Use the following API to config flash brightness.
+
+```java
+XcBarcodeScanner.setStrobeLightBrightness(int brightness);
+```
+
+All types of brightness defined in the class StrobeLightBrightness.
+
+```java
+public class StrobeLightBrightness {
+    public static int FULL_BRIGHTNESS = 4;
+    public static int MEDIUM_BRIGHTNESS = 7;
+    public static int WEAK_BRIGHTNESS = 5;
+    public static int WEAKEST_BRIGHTNESS = 6;
+}
+```
+
+Sample code:
+
+```
+XcBarcodeScanner.setStrobeLightBrightness(StrobeLightBrightness.WEAK_BRIGHTNESS);
+```
+
+## Get properties for the EAN13/Matrix25/UPCA symbology
+
+Use the following API to get properties for the EAN13/Matrix25/UPCA symbology.
+
+```java
+int getDecoderTagValue(int tag);
+```
+
+The properties that support queries are defined in the XCBarcodeTag class:
+
+```
+public class XCBarcodeTag {
+    // EAN-13
+    // Transmit check digit.1:enable;0:disable
+    public static final int TAG_EAN13_CHECK_DIGIT_TRANSMIT   = 0x1A013002;
+    // 2 Digit Addenda.1:enable;0:disable
+    public static final int TAG_EAN13_2CHAR_ADDENDA_ENABLED  = 0x1A013003;
+    // 5 Digit Addenda.1:enable;0:disable
+    public static final int TAG_EAN13_5CHAR_ADDENDA_ENABLED  = 0x1A013004;
+    // Addenda Required.1:enable;0:disable
+    public static final int TAG_EAN13_ADDENDA_REQUIRED       = 0x1A013005;
+    // Addenda add Separator.1:enable;0:disable
+    public static final int TAG_EAN13_ADDENDA_SEPARATOR      = 0x1A013006;
+
+    //Matrix 2 of 5
+    // Check digit options.
+    // 0:Disable Check Digit;1:Enable Check Digit and Output;2:Enable Check Digit and No Output.
+    public static final int TAG_M25_CHECK_DIGIT_MODE         = 0x1A01C004;
+
+    // UPC-A
+    // Transmit check digit.1:enable;0:disable
+    public static final int TAG_UPCA_CHECK_DIGIT_TRANSMIT    = 0x1A010002;
+    // Number system digit.1:enable;0:disable
+    public static final int TAG_UPCA_NUMBER_SYSTEM_TRANSMIT  = 0x1A010003;
+    // 2 Digit Addenda.1:enable;0:disable
+    public static final int TAG_UPCA_2CHAR_ADDENDA_ENABLED   = 0x1A010004;
+    // 5 Digit Addenda.1:enable;0:disable
+    public static final int TAG_UPCA_5CHAR_ADDENDA_ENABLED   = 0x1A010005;
+    // Addenda Required.1:enable;0:disable
+    public static final int TAG_UPCA_ADDENDA_REQUIRED        = 0x1A010006;
+    // Addenda add Separator.1:enable;0:disable
+    public static final int TAG_UPCA_ADDENDA_SEPARATOR       = 0x1A010007;
+    // Convert to EAN13.1:enable;0:disable
+    public static final int TAG_UPCA_ADD_COUNTRY_CODE        = 0x1A010008;
+}
+```
+
+Sample code:
+
+```
+// This method is used to check if stripping of EAN-13 check digit in decoded data is enabled.
+// 1:enable;0:disable
+int checkSumDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN13_CHECK_DIGIT_TRANSMIT);
+
+// Returns the constant of this type with the specified name.
+// 1:Enable Check Digit and Output;2:Enable Check Digit and No Output.
+int checkDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_M25_CHECK_DIGIT_MODE);
+
+// This method is used to enable/disable decoding of 2-digit supplemental code for UPC-A.
+// 1:enable;0:disable
+int twoAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_2CHAR_ADDENDA_ENABLED);
+```
+
+## Set properties for the EAN13/Matrix25/UPCA symbology
+
+Use the following API to set properties for the EAN13/Matrix25/UPCA symbology.
+
+```java
+void setDecoderTag(int tag, int value);
+```
+
+The properties that support queries are defined in the XCBarcodeTag class:
+
+```
+public class XCBarcodeTag {
+    // EAN-13
+    // Transmit check digit.1:enable;0:disable
+    public static final int TAG_EAN13_CHECK_DIGIT_TRANSMIT   = 0x1A013002;
+    // 2 Digit Addenda.1:enable;0:disable
+    public static final int TAG_EAN13_2CHAR_ADDENDA_ENABLED  = 0x1A013003;
+    // 5 Digit Addenda.1:enable;0:disable
+    public static final int TAG_EAN13_5CHAR_ADDENDA_ENABLED  = 0x1A013004;
+    // Addenda Required.1:enable;0:disable
+    public static final int TAG_EAN13_ADDENDA_REQUIRED       = 0x1A013005;
+    // Addenda add Separator.1:enable;0:disable
+    public static final int TAG_EAN13_ADDENDA_SEPARATOR      = 0x1A013006;
+
+    //Matrix 2 of 5
+    // Check digit options.
+    // 0:Disable Check Digit;1:Enable Check Digit and Output;2:Enable Check Digit and No Output.
+    public static final int TAG_M25_CHECK_DIGIT_MODE         = 0x1A01C004;
+
+    // UPC-A
+    // Transmit check digit.1:enable;0:disable
+    public static final int TAG_UPCA_CHECK_DIGIT_TRANSMIT    = 0x1A010002;
+    // Number system digit.1:enable;0:disable
+    public static final int TAG_UPCA_NUMBER_SYSTEM_TRANSMIT  = 0x1A010003;
+    // 2 Digit Addenda.1:enable;0:disable
+    public static final int TAG_UPCA_2CHAR_ADDENDA_ENABLED   = 0x1A010004;
+    // 5 Digit Addenda.1:enable;0:disable
+    public static final int TAG_UPCA_5CHAR_ADDENDA_ENABLED   = 0x1A010005;
+    // Addenda Required.1:enable;0:disable
+    public static final int TAG_UPCA_ADDENDA_REQUIRED        = 0x1A010006;
+    // Addenda add Separator.1:enable;0:disable
+    public static final int TAG_UPCA_ADDENDA_SEPARATOR       = 0x1A010007;
+    // Convert to EAN13.1:enable;0:disable
+    public static final int TAG_UPCA_ADD_COUNTRY_CODE        = 0x1A010008;
+}
+```
+
+Sample code:
+
+```
+// This method is used to enable/disable stripping of EAN-13 check digit in decoded data.
+// 1:enable;0:disable
+XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_EAN13_CHECK_DIGIT_TRANSMIT, 1);
+
+// This method is used to set the optional checksum setting of Symbologies.Matrix2of5Properties to the decoder.
+// 0:Disable Check Digit;1:Enable Check Digit and Output;2:Enable Check Digit and No Output.
+XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_M25_CHECK_DIGIT_MODE, 2);
+
+// This method is used to enable/disable decoding of 2-digit supplemental code for UPC-A.
+// 1:enable;0:disable
+XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCA_2CHAR_ADDENDA_ENABLED, 0);
+```
+
+

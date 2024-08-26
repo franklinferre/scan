@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.xcheng.demo.scanner"
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion 29
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0.0.1"
 
@@ -44,5 +44,6 @@ android {
 }
 
 dependencies {
-    implementation('com.xcheng:scanner:1.1.3')
+//    implementation('com.xcheng:scanner:1.1.3')
+    implementation files('src\\main\\libs\\xcscanner_v1.1.9-release.aar')
 }
