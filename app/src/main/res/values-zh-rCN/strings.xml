@@ -76,4 +76,14 @@
     <string name="txt_barcode_enable">开启</string>
     <string name="txt_qrcode">QR Code</string>
     <string name="txt_ean13">EAN-13</string>
+    <string name="transmit_check_digit">输出校验码</string>
+    <string name="check_digit_options">校验码选项</string>
+    <string name="digit_addenda_2">支持2位附加码</string>
+    <string name="digit_addenda_5">支持5位附加码</string>
+    <string name="addenda_required">强制要求附加码</string>
+    <string name="addenda_add_separator">附加码前加分隔符</string>
+    <string name="txt_matrix25">MATRIX25</string>
+    <string name="txt_upcA">UPC-A</string>
+    <string name="number_system">输出数制码</string>
+    <string name="upca_convert_to_ean13">转换为EAN13</string>
 </resources>
