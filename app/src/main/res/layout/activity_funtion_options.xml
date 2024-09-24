@@ -38,6 +38,24 @@
 
         <View style="@style/DividerStyle" />
 
+        <!-- 扫码触发模式 -->
+        <!--Scan trigger mode-->
+        <LinearLayout style="@style/OptionItemLinearHStyle">
+
+            <TextView
+                style="@style/OptionItemTxtStyle"
+                android:text="@string/text_scan_trigger_mode" />
+
+            <Spinner
+                android:id="@+id/sp_trigger_mode"
+                style="@style/CommonSpinnerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/scan_trigger_mode_entries" />
+        </LinearLayout>
+
+        <View style="@style/DividerStyle" />
+
         <!-- 条码数据输出模式 -->
         <!--Barcode data output mode-->
         <LinearLayout style="@style/OptionItemLinearHStyle">

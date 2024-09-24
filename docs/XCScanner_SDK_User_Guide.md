@@ -18,6 +18,7 @@
 | 1.1.3       | 2023/04/11 | Add API to support set suffix2 and prefix2.                                                                                                                                                     |
 | 1.1.8       | 2024/05/16 | Add API to support set custom BroadcastReceiver, Disable/Enable Scan button, Export/Import configuration file, Configure barcode output failure event notification, Configure flash brightness. |
 | 1.1.9       | 2024/08/26 | Add API to support set/get properties for the EAN13/Matrix25/UPCA symbology                                                                                                                     |
+| 1.1.10      | 2024/09/24 | Add API to support set/get properties for the scan trigger mode.                                                                                                                                |
 
 
 # Basic function
@@ -815,5 +816,56 @@ XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_M25_CHECK_DIGIT_MODE, 2);
 // 1:enable;0:disable
 XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCA_2CHAR_ADDENDA_ENABLED, 0);
 ```
+
+## Get scan trigger mode
+
+Use the following API to get scan trigger mode.
+
+```java
+String getScanTriggerMode();
+```
+
+The properties that support queries are defined in the ScanTriggerMode class:
+
+```
+public class ScanTriggerMode {
+    public static final String STOP_ON_RELEASE = "SYNC"; //Stop on release
+    public static final String STOP_ON_TIMEOUT = "TIMEOUT"; //Stop on timeout
+}
+```
+
+Sample code:
+
+```
+String defMode = XcBarcodeScanner.getScanTriggerMode();
+```
+
+## Set scan trigger mode
+
+Use the following API to set scan trigger mode.
+
+```java
+void setScanTriggerMode(String val);
+```
+
+The properties that support queries are defined in the ScanTriggerMode class:
+
+```
+public class ScanTriggerMode {
+    public static final String STOP_ON_RELEASE = "SYNC"; //Stop on release
+    public static final String STOP_ON_TIMEOUT = "TIMEOUT"; //Stop on timeout
+}
+```
+
+Sample code:
+
+```
+//set the scan trigger mode to stop on release
+XcBarcodeScanner.setScanTriggerMode(ScanTriggerMode.STOP_ON_RELEASE); 
+
+//set the scan trigger mode to stop on timeout
+XcBarcodeScanner.setScanTriggerMode(ScanTriggerMode.STOP_ON_TIMEOUT);
+```
+
 
 

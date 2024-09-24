@@ -43,6 +43,7 @@
     <string name="function_options">Function options</string>
     <string name="pref_group_control_options_title">Control options</string>
     <string name="text_scan_timeout">Max scan time: </string>
+    <string name="text_scan_trigger_mode">Scan Trigger Mode: </string>
     <string name="text_data_receive_method">Output mode: </string>
     <string name="text_multibarcode_num">MultiBarcodes limit: </string>
     <string name="text_multibarcode_exactly_num">Fixed number of Barcodes</string>

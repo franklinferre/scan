@@ -29,6 +29,16 @@
         <item>9</item>
     </integer-array>
 
+    <string-array name="scan_trigger_mode_entries">
+        <item>Stop on release</item>
+        <item>Stop on timeout</item>
+    </string-array>
+
+    <string-array name="scan_trigger_mode_values" translatable="false">
+        <item>SYNC</item>
+        <item>TIMEOUT</item>
+    </string-array>
+
     <string-array name="data_receive_method_entries">
         <item>Cursor</item>
         <item>Broadcast</item>

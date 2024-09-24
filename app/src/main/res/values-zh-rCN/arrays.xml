@@ -29,6 +29,16 @@
         <item>9</item>
     </integer-array>
 
+    <string-array name="scan_trigger_mode_entries">
+        <item>按键弹起时停止</item>
+        <item>超时后停止</item>
+    </string-array>
+
+    <string-array name="scan_trigger_mode_values" translatable="false">
+        <item>SYNC</item>
+        <item>TIMEOUT</item>
+    </string-array>
+
     <string-array name="data_receive_method_entries">
         <item>输入框</item>
         <item>广播</item>

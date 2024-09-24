@@ -28,7 +28,7 @@ public class FunctionOptionsFragment extends BaseFragment implements View.OnClic
 
     private static final String TAG = "XCScannerSDK_FunctionOptions";
 
-    private Spinner mSpTimeOut, mSpDataReceiveMethod, mSpMultiBarcodeNum, mSpViewSize;
+    private Spinner mSpTimeOut, mSpTriggerMode, mSpDataReceiveMethod, mSpMultiBarcodeNum, mSpViewSize;
     private Switch mSwExactlyMultiNum;
 
     private LinearLayout mLyBroadcastAction, mLyBroadcastKey;
@@ -60,6 +60,11 @@ public class FunctionOptionsFragment extends BaseFragment implements View.OnClic
             Log.i(TAG, funName + ":: timeOut = " + timeOut[position]);
             // set scan timeout
             XcBarcodeScanner.setTimeout(timeOut[position]);
+        } else if (parent.getId() == R.id.sp_trigger_mode) {
+            String[] triggerMode = getResources().getStringArray(R.array.scan_trigger_mode_values);
+            Log.i(TAG, funName + ":: triggerMode = " + triggerMode[position]);
+            // set scan trigger mode
+            XcBarcodeScanner.setScanTriggerMode(triggerMode[position]);
         } else if (parent.getId() == R.id.sp_data_receive_method) {
             String[] dataReceiveMethod = getResources().getStringArray(R.array.data_receive_method_values);
             Log.i(TAG, funName + ":: dataReceiveMethod = " + dataReceiveMethod[position]);
@@ -206,12 +211,15 @@ public class FunctionOptionsFragment extends BaseFragment implements View.OnClic
 
     private void initView(View view) {
         mSpTimeOut = view.findViewById(R.id.sp_timeout);
+        mSpTriggerMode = view.findViewById(R.id.sp_trigger_mode);
         mSpDataReceiveMethod = view.findViewById(R.id.sp_data_receive_method);
         mSpMultiBarcodeNum = view.findViewById(R.id.sp_multi_barcode_num);
         mSpViewSize = view.findViewById(R.id.sp_view_size);
         mSwExactlyMultiNum = view.findViewById(R.id.sw_exactly_multi_num);
         mSpTimeOut.setSelection(getSpPositionFromDefVal(R.array.scan_timeout_values, DefaultOptions.DEFAULT_SCAN_TIMEOUT_VAL));
         mSpTimeOut.setOnItemSelectedListener(this);
+        mSpTriggerMode.setSelection(getSpPositionFromDefVal(R.array.scan_trigger_mode_values, DefaultOptions.DEFAULT_TRIGGER_MODE_VAL));
+        mSpTriggerMode.setOnItemSelectedListener(this);
         mSpDataReceiveMethod.setSelection(getSpPositionFromDefVal(R.array.data_receive_method_values, DefaultOptions.DEFAULT_DATA_RECEIVE_METHOD_VAL));
         mSpDataReceiveMethod.setOnItemSelectedListener(this);
         mSpMultiBarcodeNum.setSelection(getSpPositionFromDefVal(R.array.multibarcodes_number_entries, DefaultOptions.DEFAULT_MULTI_NUM_VAL));

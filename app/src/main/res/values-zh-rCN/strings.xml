@@ -44,6 +44,7 @@
     <string name="function_options">功能选项</string>
     <string name="pref_group_control_options_title">控制选项</string>
     <string name="text_scan_timeout">扫码超时时间：</string>
+    <string name="text_scan_trigger_mode">扫码触发模式：</string>
     <string name="text_data_receive_method">条码数据输出模式：</string>
     <string name="text_multibarcode_num">多条码数量：</string>
     <string name="text_multibarcode_exactly_num">固定的多条码数量</string>

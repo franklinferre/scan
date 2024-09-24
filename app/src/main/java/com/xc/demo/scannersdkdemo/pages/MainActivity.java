@@ -34,6 +34,7 @@ import com.xc.demo.scannersdkdemo.tools.AlertDialogUtils;
 import com.xc.demo.scannersdkdemo.tools.PictureDialog;
 import com.xc.demo.scannersdkdemo.tools.Utils;
 import com.xcheng.scanner.LicenseState;
+import com.xcheng.scanner.ScanTriggerMode;
 import com.xcheng.scanner.XcBarcodeScanner;
 
 import java.io.ByteArrayOutputStream;
@@ -256,7 +257,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 // If loop scan enabled, not need process ACTION_UP event.
             } else {
                 // Stop scanning action
-                XcBarcodeScanner.stopScan();
+                if (XcBarcodeScanner.getScanTriggerMode().equals(ScanTriggerMode.STOP_ON_RELEASE)) {
+                    XcBarcodeScanner.stopScan();
+                }
             }
             return true;
         }

@@ -1,7 +1,11 @@
 package com.xc.demo.scannersdkdemo;
 
+import com.xcheng.scanner.ScanTriggerMode;
+
 public class DefaultOptions {
     public static final int DEFAULT_SCAN_TIMEOUT_VAL = 2; // 2 seconds
+
+    public static final String DEFAULT_TRIGGER_MODE_VAL = ScanTriggerMode.STOP_ON_RELEASE;
 
     public static final String DEFAULT_DATA_RECEIVE_METHOD_VAL = "BROADCAST_EVENT/CLIPBOARD_EVENT"; // Output barcode data via broadcast and clipboard simulate
 
