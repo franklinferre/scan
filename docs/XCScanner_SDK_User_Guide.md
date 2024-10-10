@@ -19,6 +19,7 @@
 | 1.1.8       | 2024/05/16 | Add API to support set custom BroadcastReceiver, Disable/Enable Scan button, Export/Import configuration file, Configure barcode output failure event notification, Configure flash brightness. |
 | 1.1.9       | 2024/08/26 | Add API to support set/get properties for the EAN13/Matrix25/UPCA symbology                                                                                                                     |
 | 1.1.10      | 2024/09/24 | Add API to support set/get properties for the scan trigger mode.                                                                                                                                |
+| 1.1.11      | 2024/09/24 | Add API to support set/get properties for the Code39/DATAMATRIX/EAN8 symbology                                                                                                                  |
 
 
 # Basic function
@@ -691,9 +692,9 @@ Sample code:
 XcBarcodeScanner.setStrobeLightBrightness(StrobeLightBrightness.WEAK_BRIGHTNESS);
 ```
 
-## Get properties for the EAN13/Matrix25/UPCA symbology
+## Get barcode properties
 
-Use the following API to get properties for the EAN13/Matrix25/UPCA symbology.
+Use the following API to get barcode properties.
 
 ```java
 int getDecoderTagValue(int tag);
@@ -703,6 +704,40 @@ The properties that support queries are defined in the XCBarcodeTag class:
 
 ```
 public class XCBarcodeTag {
+    // Code39
+    // Check digit options.
+    // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output.
+    public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
+    // Transmit start/stop char.1:enable;0:disable
+    public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
+	// Code 39 Full ASCII.1:enable;0:disable
+    public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
+    // Code39 Base32 decode.1:enable;0:disable
+    public static final int TAG_CODE39_BASE32_ENABLED        = 0x1A016008;
+    // Maximum length(1-127).The range of values is integers from 1 to 127.
+    public static final int TAG_CODE39_MAX_LENGTH            = 0x1A016003;
+    // Minimum length(1-127).The range of values is integers from 1 to 127.
+    public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
+
+    // DataMatrix
+    // With Separators.1:display;0:hide
+    public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
+    // Max out length (0: no limit).
+    // An integer greater than or equal to 0, where 0 indicates no restriction.
+    public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+
+    // EAN-8
+    // Transmit check digit.1:enable;0:disable
+    public static final int TAG_EAN8_CHECK_DIGIT_TRANSMIT    = 0x1A012002;
+    // 2 Digit Addenda.1:enable;0:disable
+    public static final int TAG_EAN8_2CHAR_ADDENDA_ENABLED   = 0x1A012003;
+    // 5 Digit Addenda.1:enable;0:disable
+    public static final int TAG_EAN8_5CHAR_ADDENDA_ENABLED   = 0x1A012004;
+    // Addenda Required.1:enable;0:disable
+    public static final int TAG_EAN8_ADDENDA_REQUIRED        = 0x1A012005;
+    // Addenda add Separator.1:enable;0:disable
+    public static final int TAG_EAN8_ADDENDA_SEPARATOR       = 0x1A012006;
+    
     // EAN-13
     // Transmit check digit.1:enable;0:disable
     public static final int TAG_EAN13_CHECK_DIGIT_TRANSMIT   = 0x1A013002;
@@ -754,9 +789,9 @@ int checkDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_M25_CHE
 int twoAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_2CHAR_ADDENDA_ENABLED);
 ```
 
-## Set properties for the EAN13/Matrix25/UPCA symbology
+## Set barcode properties
 
-Use the following API to set properties for the EAN13/Matrix25/UPCA symbology.
+Use the following API to set barcode properties.
 
 ```java
 void setDecoderTag(int tag, int value);
@@ -766,6 +801,40 @@ The properties that support queries are defined in the XCBarcodeTag class:
 
 ```
 public class XCBarcodeTag {
+    // Code39
+    // Check digit options.
+    // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output.
+    public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
+    // Transmit start/stop char.1:enable;0:disable
+    public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
+	// Code 39 Full ASCII.1:enable;0:disable
+    public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
+    // Code39 Base32 decode.1:enable;0:disable
+    public static final int TAG_CODE39_BASE32_ENABLED        = 0x1A016008;
+    // Maximum length(1-127).The range of values is integers from 1 to 127.
+    public static final int TAG_CODE39_MAX_LENGTH            = 0x1A016003;
+    // Minimum length(1-127).The range of values is integers from 1 to 127.
+    public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
+
+    // DataMatrix
+    // With Separators.1:display;0:hide
+    public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
+    // Max out length (0: no limit).
+    // An integer greater than or equal to 0, where 0 indicates no restriction.
+    public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+
+    // EAN-8
+    // Transmit check digit.1:enable;0:disable
+    public static final int TAG_EAN8_CHECK_DIGIT_TRANSMIT    = 0x1A012002;
+    // 2 Digit Addenda.1:enable;0:disable
+    public static final int TAG_EAN8_2CHAR_ADDENDA_ENABLED   = 0x1A012003;
+    // 5 Digit Addenda.1:enable;0:disable
+    public static final int TAG_EAN8_5CHAR_ADDENDA_ENABLED   = 0x1A012004;
+    // Addenda Required.1:enable;0:disable
+    public static final int TAG_EAN8_ADDENDA_REQUIRED        = 0x1A012005;
+    // Addenda add Separator.1:enable;0:disable
+    public static final int TAG_EAN8_ADDENDA_SEPARATOR       = 0x1A012006;
+    
     // EAN-13
     // Transmit check digit.1:enable;0:disable
     public static final int TAG_EAN13_CHECK_DIGIT_TRANSMIT   = 0x1A013002;

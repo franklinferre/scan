@@ -19,6 +19,7 @@
 | 1.1.8   | 2024/05/16 | 增加自定义广播、返回条码类型结果的回调、扫码失败提示音、闪光灯亮度、禁用/启用扫码快捷按键、导出/导入配置文件接口。 |
 | 1.1.9   | 2024/08/26 | 增加获取/配置EAN13、Matrix25、UPCA条码属性接口。                          |
 | 1.1.10  | 2024/09/24 | 增加获取/配置扫码触发模式接口。                                           |
+| 1.1.11  | 2024/09/24 | 增加获取/配置Code39、DATAMATRIX、EAN8条码属性接口。                       |
 
 
 # 功能使用
@@ -704,6 +705,38 @@ int getDecoderTagValue(int tag);
 
 ```
 public class XCBarcodeTag {
+    // Code39
+    // 校验码选项。0：关闭校验；1：开启校验不输出；2：开启校验并输出。
+    public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
+    // 输出起始和结束字符。1：开启；0：关闭
+    public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
+	// Code 39 Full ASCII。1：开启；0：关闭
+    public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
+    // 支持Code32解码。1：开启；0：关闭
+    public static final int TAG_CODE39_BASE32_ENABLED        = 0x1A016008;
+    // 最大长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE39_MAX_LENGTH            = 0x1A016003;
+    // 最小长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
+
+    // DataMatrix
+    // 显示分隔符。1：显示；0：隐藏
+    public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
+    // 最大输出长度（0：不限制）。大于等于0的整数，0表示不限制。
+    public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+
+    // EAN-8
+    // 输出校验码。1：开启；0：关闭
+    public static final int TAG_EAN8_CHECK_DIGIT_TRANSMIT    = 0x1A012002;
+    // 支持两位附加码。1：开启；0：关闭
+    public static final int TAG_EAN8_2CHAR_ADDENDA_ENABLED   = 0x1A012003;
+    // 支持五位附加码。1：开启；0：关闭
+    public static final int TAG_EAN8_5CHAR_ADDENDA_ENABLED   = 0x1A012004;
+    // 强制要求附加码。1：开启；0：关闭
+    public static final int TAG_EAN8_ADDENDA_REQUIRED        = 0x1A012005;
+    // 附加码前加分隔符。1：开启；0：关闭
+    public static final int TAG_EAN8_ADDENDA_SEPARATOR       = 0x1A012006;
+    
     // EAN-13
     // 输出校验码。1：开启；0：关闭
     public static final int TAG_EAN13_CHECK_DIGIT_TRANSMIT   = 0x1A013002;
@@ -763,6 +796,38 @@ void setDecoderTag(int tag, int value);
 
 ```
 public class XCBarcodeTag {
+    // Code39
+    // 校验码选项。0：关闭校验；1：开启校验不输出；2：开启校验并输出。
+    public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
+    // 输出起始和结束字符。1：开启；0：关闭
+    public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
+	// Code 39 Full ASCII。1：开启；0：关闭
+    public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
+    // 支持Code32解码。1：开启；0：关闭
+    public static final int TAG_CODE39_BASE32_ENABLED        = 0x1A016008;
+    // 最大长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE39_MAX_LENGTH            = 0x1A016003;
+    // 最小长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
+
+    // DataMatrix
+    // 显示分隔符。1：显示；0：隐藏
+    public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
+    // 最大输出长度（0：不限制）。大于等于0的整数，0表示不限制。
+    public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+
+    // EAN-8
+    // 输出校验码。1：开启；0：关闭
+    public static final int TAG_EAN8_CHECK_DIGIT_TRANSMIT    = 0x1A012002;
+    // 支持两位附加码。1：开启；0：关闭
+    public static final int TAG_EAN8_2CHAR_ADDENDA_ENABLED   = 0x1A012003;
+    // 支持五位附加码。1：开启；0：关闭
+    public static final int TAG_EAN8_5CHAR_ADDENDA_ENABLED   = 0x1A012004;
+    // 强制要求附加码。1：开启；0：关闭
+    public static final int TAG_EAN8_ADDENDA_REQUIRED        = 0x1A012005;
+    // 附加码前加分隔符。1：开启；0：关闭
+    public static final int TAG_EAN8_ADDENDA_SEPARATOR       = 0x1A012006;
+    
     // EAN-13
     // 输出校验码。1：开启；0：关闭
     public static final int TAG_EAN13_CHECK_DIGIT_TRANSMIT   = 0x1A013002;

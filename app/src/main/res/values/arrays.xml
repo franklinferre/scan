@@ -174,4 +174,16 @@
         <item>Enable Check Digit and Output</item>
         <item>Enable Check Digit and No Output</item>
     </string-array>
+
+    <string-array name="code39_check_digit_entries">
+        <item>Disable Check Digit</item>
+        <item>Enable Check Digit and No Output</item>
+        <item>Enable Check Digit and Output</item>
+    </string-array>
+
+    <string-array name="code39_check_digit_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

@@ -49,6 +49,12 @@
         <item name="android:layout_marginTop">@dimen/common_5</item>
     </style>
 
+    <style name="OptionItemEditNumberStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:inputType">number</item>
+    </style>
+
     <style name="DividerStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/divider_height</item>

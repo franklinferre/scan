@@ -24,6 +24,142 @@
             style="@style/OptionItemSwitchStyle"
             android:text="@string/txt_barcode_enable" />
 
+        <!--Code39-->
+        <TextView
+            style="@style/OptionTitleStyle"
+            android:text="@string/txt_code39" />
+
+        <LinearLayout style="@style/OptionItemLinearHStyle">
+
+            <TextView
+                style="@style/OptionItemTxtStyle"
+                android:text="@string/check_digit_options" />
+
+            <Spinner
+                android:id="@+id/sp_code39_check_digit"
+                style="@style/CommonSpinnerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/code39_check_digit_entries" />
+        </LinearLayout>
+
+        <View style="@style/DividerStyle" />
+
+        <Switch
+            android:id="@+id/sw_transmit_char"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/transmit_start_stop_char" />
+
+        <View style="@style/DividerStyle" />
+
+        <Switch
+            android:id="@+id/sw_full_asc"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/code39_full_asc" />
+
+        <View style="@style/DividerStyle" />
+
+        <Switch
+            android:id="@+id/sw_base32"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/code39_base32" />
+
+        <View style="@style/DividerStyle" />
+
+        <LinearLayout style="@style/OptionItemLinearHStyle">
+
+            <TextView
+                style="@style/OptionItemTxtStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/code39_max_length_tip" />
+
+            <EditText
+                android:id="@+id/et_code39_max_length"
+                style="@style/OptionItemEditNumberStyle"
+                android:hint="127" />
+        </LinearLayout>
+
+        <View style="@style/DividerStyle" />
+
+        <LinearLayout style="@style/OptionItemLinearHStyle">
+
+            <TextView
+                style="@style/OptionItemTxtStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/code39_min_length_tip" />
+
+            <EditText
+                android:id="@+id/et_code39_min_length"
+                style="@style/OptionItemEditNumberStyle"
+                android:hint="1" />
+        </LinearLayout>
+
+        <!--DataMatrix-->
+        <TextView
+            style="@style/OptionTitleStyle"
+            android:text="@string/txt_data_matrix" />
+
+        <Switch
+            android:id="@+id/sw_with_separators"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/text_with_separators" />
+
+        <View style="@style/DividerStyle" />
+
+        <LinearLayout style="@style/OptionItemLinearHStyle">
+
+            <TextView
+                style="@style/OptionItemTxtStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_max_output_length" />
+
+            <EditText
+                android:id="@+id/et_output_max_length"
+                style="@style/OptionItemEditNumberStyle"
+                android:hint="0" />
+        </LinearLayout>
+
+        <!--EAN8-->
+        <TextView
+            style="@style/OptionTitleStyle"
+            android:text="@string/txt_ean8" />
+
+        <Switch
+            android:id="@+id/sw_ean8_checksum"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/transmit_check_digit" />
+
+        <View style="@style/DividerStyle" />
+
+        <Switch
+            android:id="@+id/sw_ean8_digit_2"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/digit_addenda_2" />
+
+        <View style="@style/DividerStyle" />
+
+        <Switch
+            android:id="@+id/sw_ean8_digit_5"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/digit_addenda_5" />
+
+        <View style="@style/DividerStyle" />
+
+        <Switch
+            android:id="@+id/sw_ean8_required"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/addenda_required" />
+
+        <View style="@style/DividerStyle" />
+
+        <Switch
+            android:id="@+id/sw_ean8_separator"
+            style="@style/OptionItemSwitchStyle"
+            android:text="@string/addenda_add_separator" />
+
         <!--EAN13-->
         <TextView
             style="@style/OptionTitleStyle"
