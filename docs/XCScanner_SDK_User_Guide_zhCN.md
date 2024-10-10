@@ -19,7 +19,7 @@
 | 1.1.8   | 2024/05/16 | 增加自定义广播、返回条码类型结果的回调、扫码失败提示音、闪光灯亮度、禁用/启用扫码快捷按键、导出/导入配置文件接口。 |
 | 1.1.9   | 2024/08/26 | 增加获取/配置EAN13、Matrix25、UPCA条码属性接口。                          |
 | 1.1.10  | 2024/09/24 | 增加获取/配置扫码触发模式接口。                                           |
-| 1.1.11  | 2024/09/24 | 增加获取/配置Code39、DATAMATRIX、EAN8条码属性接口。                       |
+| 1.1.11  | 2024/10/10 | 增加获取/配置Code39、DATAMATRIX、EAN8条码属性接口。                       |
 
 
 # 功能使用
@@ -710,7 +710,7 @@ public class XCBarcodeTag {
     public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
     // 输出起始和结束字符。1：开启；0：关闭
     public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
-	// Code 39 Full ASCII。1：开启；0：关闭
+    // Code 39 Full ASCII。1：开启；0：关闭
     public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
     // 支持Code32解码。1：开启；0：关闭
     public static final int TAG_CODE39_BASE32_ENABLED        = 0x1A016008;
@@ -801,7 +801,7 @@ public class XCBarcodeTag {
     public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
     // 输出起始和结束字符。1：开启；0：关闭
     public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
-	// Code 39 Full ASCII。1：开启；0：关闭
+    // Code 39 Full ASCII。1：开启；0：关闭
     public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
     // 支持Code32解码。1：开启；0：关闭
     public static final int TAG_CODE39_BASE32_ENABLED        = 0x1A016008;

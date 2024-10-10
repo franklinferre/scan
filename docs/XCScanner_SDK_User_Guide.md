@@ -5,7 +5,7 @@
 
 
 | **Version** | **Date**   | **Changes**                                                                                                                                                                                     |
-|-------------| ---------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1.0.0       | 2023/02/03 | Basic scan result callback and settings.                                                                                                                                                        |
 | 1.0.3       | 2023/02/12 | Add API.                                                                                                                                                                                        |
 | 1.0.4       | 2023/02/27 | Add suspend and resume API.                                                                                                                                                                     |
@@ -19,7 +19,7 @@
 | 1.1.8       | 2024/05/16 | Add API to support set custom BroadcastReceiver, Disable/Enable Scan button, Export/Import configuration file, Configure barcode output failure event notification, Configure flash brightness. |
 | 1.1.9       | 2024/08/26 | Add API to support set/get properties for the EAN13/Matrix25/UPCA symbology                                                                                                                     |
 | 1.1.10      | 2024/09/24 | Add API to support set/get properties for the scan trigger mode.                                                                                                                                |
-| 1.1.11      | 2024/09/24 | Add API to support set/get properties for the Code39/DATAMATRIX/EAN8 symbology                                                                                                                  |
+| 1.1.11      | 2024/10/10 | Add API to support set/get properties for the Code39/DATAMATRIX/EAN8 symbology                                                                                                                  |
 
 
 # Basic function
@@ -708,67 +708,89 @@ public class XCBarcodeTag {
     // Check digit options.
     // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output.
     public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
-    // Transmit start/stop char.1:enable;0:disable
+    // Transmit start/stop char.
+    // 1:enable;0:disable
     public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
-	// Code 39 Full ASCII.1:enable;0:disable
+    // Code 39 Full ASCII.
+	// 1:enable;0:disable
     public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
-    // Code39 Base32 decode.1:enable;0:disable
+    // Code39 Base32 decode.
+    // 1:enable;0:disable
     public static final int TAG_CODE39_BASE32_ENABLED        = 0x1A016008;
-    // Maximum length(1-127).The range of values is integers from 1 to 127.
+    // Maximum length(1-127).
+    // The range of values is integers from 1 to 127.
     public static final int TAG_CODE39_MAX_LENGTH            = 0x1A016003;
-    // Minimum length(1-127).The range of values is integers from 1 to 127.
+    // Minimum length(1-127).
+    // The range of values is integers from 1 to 127.
     public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
 
     // DataMatrix
-    // With Separators.1:display;0:hide
+    // With Separators.
+    // 1:display;0:hide
     public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
     // Max out length (0: no limit).
     // An integer greater than or equal to 0, where 0 indicates no restriction.
     public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
 
     // EAN-8
-    // Transmit check digit.1:enable;0:disable
+    // Transmit check digit.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_CHECK_DIGIT_TRANSMIT    = 0x1A012002;
-    // 2 Digit Addenda.1:enable;0:disable
+    // 2 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_2CHAR_ADDENDA_ENABLED   = 0x1A012003;
-    // 5 Digit Addenda.1:enable;0:disable
+    // 5 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_5CHAR_ADDENDA_ENABLED   = 0x1A012004;
-    // Addenda Required.1:enable;0:disable
+    // Addenda Required.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_ADDENDA_REQUIRED        = 0x1A012005;
-    // Addenda add Separator.1:enable;0:disable
+    // Addenda add Separator.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_ADDENDA_SEPARATOR       = 0x1A012006;
     
     // EAN-13
-    // Transmit check digit.1:enable;0:disable
+    // Transmit check digit.
+    // 1:enable;0:disable
     public static final int TAG_EAN13_CHECK_DIGIT_TRANSMIT   = 0x1A013002;
-    // 2 Digit Addenda.1:enable;0:disable
+    // 2 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_EAN13_2CHAR_ADDENDA_ENABLED  = 0x1A013003;
-    // 5 Digit Addenda.1:enable;0:disable
+    // 5 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_EAN13_5CHAR_ADDENDA_ENABLED  = 0x1A013004;
-    // Addenda Required.1:enable;0:disable
+    // Addenda Required.
+    // 1:enable;0:disable
     public static final int TAG_EAN13_ADDENDA_REQUIRED       = 0x1A013005;
     // Addenda add Separator.1:enable;0:disable
     public static final int TAG_EAN13_ADDENDA_SEPARATOR      = 0x1A013006;
 
-    //Matrix 2 of 5
+    // Matrix 2 of 5
     // Check digit options.
     // 0:Disable Check Digit;1:Enable Check Digit and Output;2:Enable Check Digit and No Output.
     public static final int TAG_M25_CHECK_DIGIT_MODE         = 0x1A01C004;
 
     // UPC-A
-    // Transmit check digit.1:enable;0:disable
+    // Transmit check digit.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_CHECK_DIGIT_TRANSMIT    = 0x1A010002;
-    // Number system digit.1:enable;0:disable
+    // Number system digit.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_NUMBER_SYSTEM_TRANSMIT  = 0x1A010003;
-    // 2 Digit Addenda.1:enable;0:disable
+    // 2 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_2CHAR_ADDENDA_ENABLED   = 0x1A010004;
-    // 5 Digit Addenda.1:enable;0:disable
+    // 5 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_5CHAR_ADDENDA_ENABLED   = 0x1A010005;
-    // Addenda Required.1:enable;0:disable
+    // Addenda Required.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_ADDENDA_REQUIRED        = 0x1A010006;
-    // Addenda add Separator.1:enable;0:disable
+    // Addenda add Separator.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_ADDENDA_SEPARATOR       = 0x1A010007;
-    // Convert to EAN13.1:enable;0:disable
+    // Convert to EAN13.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_ADD_COUNTRY_CODE        = 0x1A010008;
 }
 ```
@@ -805,67 +827,89 @@ public class XCBarcodeTag {
     // Check digit options.
     // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output.
     public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
-    // Transmit start/stop char.1:enable;0:disable
+    // Transmit start/stop char.
+    // 1:enable;0:disable
     public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
-	// Code 39 Full ASCII.1:enable;0:disable
+    // Code 39 Full ASCII.
+	// 1:enable;0:disable
     public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
-    // Code39 Base32 decode.1:enable;0:disable
+    // Code39 Base32 decode.
+    // 1:enable;0:disable
     public static final int TAG_CODE39_BASE32_ENABLED        = 0x1A016008;
-    // Maximum length(1-127).The range of values is integers from 1 to 127.
+    // Maximum length(1-127).
+    // The range of values is integers from 1 to 127.
     public static final int TAG_CODE39_MAX_LENGTH            = 0x1A016003;
-    // Minimum length(1-127).The range of values is integers from 1 to 127.
+    // Minimum length(1-127).
+    // The range of values is integers from 1 to 127.
     public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
 
     // DataMatrix
-    // With Separators.1:display;0:hide
+    // With Separators.
+    // 1:display;0:hide
     public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
     // Max out length (0: no limit).
     // An integer greater than or equal to 0, where 0 indicates no restriction.
     public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
 
     // EAN-8
-    // Transmit check digit.1:enable;0:disable
+    // Transmit check digit.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_CHECK_DIGIT_TRANSMIT    = 0x1A012002;
-    // 2 Digit Addenda.1:enable;0:disable
+    // 2 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_2CHAR_ADDENDA_ENABLED   = 0x1A012003;
-    // 5 Digit Addenda.1:enable;0:disable
+    // 5 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_5CHAR_ADDENDA_ENABLED   = 0x1A012004;
-    // Addenda Required.1:enable;0:disable
+    // Addenda Required.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_ADDENDA_REQUIRED        = 0x1A012005;
-    // Addenda add Separator.1:enable;0:disable
+    // Addenda add Separator.
+    // 1:enable;0:disable
     public static final int TAG_EAN8_ADDENDA_SEPARATOR       = 0x1A012006;
     
     // EAN-13
-    // Transmit check digit.1:enable;0:disable
+    // Transmit check digit.
+    // 1:enable;0:disable
     public static final int TAG_EAN13_CHECK_DIGIT_TRANSMIT   = 0x1A013002;
-    // 2 Digit Addenda.1:enable;0:disable
+    // 2 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_EAN13_2CHAR_ADDENDA_ENABLED  = 0x1A013003;
-    // 5 Digit Addenda.1:enable;0:disable
+    // 5 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_EAN13_5CHAR_ADDENDA_ENABLED  = 0x1A013004;
-    // Addenda Required.1:enable;0:disable
+    // Addenda Required.
+    // 1:enable;0:disable
     public static final int TAG_EAN13_ADDENDA_REQUIRED       = 0x1A013005;
     // Addenda add Separator.1:enable;0:disable
     public static final int TAG_EAN13_ADDENDA_SEPARATOR      = 0x1A013006;
 
-    //Matrix 2 of 5
+    // Matrix 2 of 5
     // Check digit options.
     // 0:Disable Check Digit;1:Enable Check Digit and Output;2:Enable Check Digit and No Output.
     public static final int TAG_M25_CHECK_DIGIT_MODE         = 0x1A01C004;
 
     // UPC-A
-    // Transmit check digit.1:enable;0:disable
+    // Transmit check digit.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_CHECK_DIGIT_TRANSMIT    = 0x1A010002;
-    // Number system digit.1:enable;0:disable
+    // Number system digit.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_NUMBER_SYSTEM_TRANSMIT  = 0x1A010003;
-    // 2 Digit Addenda.1:enable;0:disable
+    // 2 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_2CHAR_ADDENDA_ENABLED   = 0x1A010004;
-    // 5 Digit Addenda.1:enable;0:disable
+    // 5 Digit Addenda.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_5CHAR_ADDENDA_ENABLED   = 0x1A010005;
-    // Addenda Required.1:enable;0:disable
+    // Addenda Required.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_ADDENDA_REQUIRED        = 0x1A010006;
-    // Addenda add Separator.1:enable;0:disable
+    // Addenda add Separator.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_ADDENDA_SEPARATOR       = 0x1A010007;
-    // Convert to EAN13.1:enable;0:disable
+    // Convert to EAN13.
+    // 1:enable;0:disable
     public static final int TAG_UPCA_ADD_COUNTRY_CODE        = 0x1A010008;
 }
 ```
