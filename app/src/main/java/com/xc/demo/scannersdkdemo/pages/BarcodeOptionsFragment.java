@@ -275,7 +275,8 @@ public class BarcodeOptionsFragment extends BaseFragment implements CompoundButt
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         Log.d(TAG, "[onEditorAction] actionId = " + actionId + ", TextView = " + v.getId());
         String val = v.getText().toString().trim();
-        if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_PREVIOUS) {
+        if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT
+                || actionId == EditorInfo.IME_ACTION_PREVIOUS || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
             switch (v.getId()) {
                 case R.id.et_code39_max_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE39_MAX_LENGTH, val.isEmpty() ? 127 : Integer.parseInt(val));
