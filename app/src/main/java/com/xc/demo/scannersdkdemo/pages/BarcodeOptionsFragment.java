@@ -9,209 +9,142 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.xc.demo.scannersdkdemo.BaseFragment;
 import com.xc.demo.scannersdkdemo.R;
+import com.xc.demo.scannersdkdemo.databinding.FragmentBarcodeOptionsBinding;
 import com.xcheng.scanner.BarcodeType;
 import com.xcheng.scanner.XCBarcodeTag;
 import com.xcheng.scanner.XcBarcodeScanner;
 
-public class BarcodeOptionsFragment extends BaseFragment implements CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener, TextView.OnEditorActionListener {
+public class BarcodeOptionsFragment extends BaseFragment {
 
     private static final String TAG = "BarcodeOptionsFragment";
-
-    // QRCode
-    private Switch mSwQRCodeEnable;
-
-    // Code39
-    private Spinner mSpCode39CheckDigit;
-    private Switch mSwTransmitChar, mSwFullAsc, mSwBase32;
-    private EditText mEtCode39MaxLength, mEtCode39MinLength;
-
-    // DataMatrix
-    private Switch mSwWithSeparators;
-    private EditText mEtOutputMaxLength;
-
-    // EAN8
-    private Switch mSwEan8Checksum, mSwEan8Digit2, mSwEan8Digit5, mSwEan8Required, mSwEan8Separator;
-
-    // EAN13
-    private Switch mSwCheckSum, mSw2Addon, mSw5Addon, mSwRequiredAddon, mSwSeparatorAddon;
-
-    // Matrix25
-    private Spinner mCheckDigitSpinner;
-
-    // UPC-A
-    private Switch mSwUpcCheckSum, mSwUpcNumberSystemCheck, mSwUpc2Addon, mSwUpc5Addon, mSwUpcRequiredAddon, mSwUpcSeparatorAddon, mSwUpcCountryCode;
+    FragmentBarcodeOptionsBinding bindingView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_barcode_options, container, false);
-        initView(rootView);
-        return rootView;
+        bindingView = DataBindingUtil.inflate(inflater, R.layout.fragment_barcode_options, container, false);
+        bindingView.setFragment(this);
+        refreshData();
+        return bindingView.getRoot();
     }
 
-    private void initView(View view) {
-        // QRCode
-        mSwQRCodeEnable = (Switch) view.findViewById(R.id.sw_qrcode_enable);
-        mSwQRCodeEnable.setOnCheckedChangeListener(this);
-
-        // Check if QRCode is enabled by default
-        boolean isQRCodeEnable = XcBarcodeScanner.isBarcodeTypeEnabled(BarcodeType.QRCODE);
-        mSwQRCodeEnable.setChecked(isQRCodeEnable);
-
+    private void refreshData() {
+        // Code11
+        boolean isCode11Enable = XcBarcodeScanner.isBarcodeTypeEnabled(BarcodeType.CODE11);
+        bindingView.swCode11Enable.setChecked(isCode11Enable);
+        int code11CheckDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE11_CHECK_DIGIT_MODE);
+        Log.d("XC_CYCY", "code11CheckDigitDef pos = " + code11CheckDigitDef);
+        bindingView.spCode11CheckDigit.setSelection(code11CheckDigitDef);
+        int code11MaxLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE11_MAX_LENGTH);
+        Log.d("XC_CYCY", "code11MaxLengthDef = " + code11MaxLengthDef);
+        bindingView.etCode11MaxLength.setText(String.valueOf(code11MaxLengthDef));
+        int code11MinLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE11_MIN_LENGTH);
+        Log.d("XC_CYCY", "code11MinLengthDef = " + code11CheckDigitDef);
+        bindingView.etCode11MinLength.setText(String.valueOf(code11MinLengthDef));
 
         // Code 39
-        mSpCode39CheckDigit = view.findViewById(R.id.sp_code39_check_digit);
         int code39CheckDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE39_CHECK_DIGIT_MODE);
-        mSpCode39CheckDigit.setSelection(code39CheckDigitDef);
-        mSpCode39CheckDigit.setOnItemSelectedListener(this);
-
-        mSwTransmitChar = view.findViewById(R.id.sw_transmit_char);
-        mSwTransmitChar.setOnCheckedChangeListener(this);
+        bindingView.spCode39CheckDigit.setSelection(code39CheckDigitDef);
         int code39CheckSumDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE39_START_STOP_TRANSMIT);
-        mSwTransmitChar.setChecked(code39CheckSumDef == 1);
-
-        mSwFullAsc = view.findViewById(R.id.sw_full_asc);
-        mSwFullAsc.setOnCheckedChangeListener(this);
+        bindingView.swTransmitChar.setChecked(code39CheckSumDef == 1);
         int fullAsc = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE39_FULL_ASCII_ENABLED);
-        mSwFullAsc.setChecked(fullAsc == 1);
-
-        mSwBase32 = view.findViewById(R.id.sw_base32);
-        mSwBase32.setOnCheckedChangeListener(this);
+        bindingView.swFullAsc.setChecked(fullAsc == 1);
         int base32 = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE39_BASE32_ENABLED);
-        mSwBase32.setChecked(base32 == 1);
-
-        mEtCode39MaxLength = view.findViewById(R.id.et_code39_max_length);
+        bindingView.swBase32.setChecked(base32 == 1);
         int code39MaxLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE39_MAX_LENGTH);
-        mEtCode39MaxLength.setText(String.valueOf(code39MaxLengthDef));
-        mEtCode39MaxLength.setOnEditorActionListener(this);
-
-        mEtCode39MinLength = view.findViewById(R.id.et_code39_min_length);
+        bindingView.etCode39MaxLength.setText(String.valueOf(code39MaxLengthDef));
         int code39MinLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE39_MIN_LENGTH);
-        mEtCode39MinLength.setText(String.valueOf(code39MinLengthDef));
-        mEtCode39MinLength.setOnEditorActionListener(this);
+        bindingView.etCode39MinLength.setText(String.valueOf(code39MinLengthDef));
 
+        // Code49
+        int code49MaxLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE49_MAX_LENGTH);
+        bindingView.etCode49MaxLength.setText(String.valueOf(code49MaxLengthDef));
+        int code49MinLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE49_MIN_LENGTH);
+        bindingView.etCode49MinLength.setText(String.valueOf(code49MinLengthDef));
+
+        // Code93
+        int code93MaxLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE93_MAX_LENGTH);
+        bindingView.etCode93MaxLength.setText(String.valueOf(code93MaxLengthDef));
+        int code93MinLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE93_MIN_LENGTH);
+        bindingView.etCode93MinLength.setText(String.valueOf(code93MinLengthDef));
+
+        // Code128
+        int code128Separators = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_C128_SEPARATOR_ENABLED);
+        bindingView.swCode128Separator.setChecked(code128Separators == 1);
+        int code128MaxLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE128_MAX_LENGTH);
+        bindingView.etCode128MaxLength.setText(String.valueOf(code128MaxLengthDef));
+        int code128MinLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE128_MIN_LENGTH);
+        bindingView.etCode128MinLength.setText(String.valueOf(code128MinLengthDef));
+
+        // Codabar
+        int codabarCheckDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODABAR_CHECK_DIGIT_MODE);
+        bindingView.spCodabarCheckDigit.setSelection(codabarCheckDigitDef);
+        int codabarTransmitCharDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODABAR_START_STOP_TRANSMIT);
+        bindingView.swCodabarTransmitChar.setChecked(codabarTransmitCharDef == 1);
+        int codabarMinLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODABAR_MIN_LENGTH);
+        bindingView.etCodabarMinLength.setText(String.valueOf(codabarMinLengthDef));
 
         // DataMatrix
-        mSwWithSeparators = view.findViewById(R.id.sw_with_separators);
-        mSwWithSeparators.setOnCheckedChangeListener(this);
         int withSeparators = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_DATAMATRIX_SEPARATOR_ENABLED);
-        mSwWithSeparators.setChecked(withSeparators == 1);
-
-        mEtOutputMaxLength = view.findViewById(R.id.et_output_max_length);
+        bindingView.swWithSeparators.setChecked(withSeparators == 1);
         int outputMaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_DATAMATRIX_OUTPUT_MAX_LENGTH);
-        mEtOutputMaxLength.setText(String.valueOf(outputMaxLength));
-        mEtOutputMaxLength.setOnEditorActionListener(this);
-
+        bindingView.etOutputMaxLength.setText(String.valueOf(outputMaxLength));
 
         // EAN8
-        mSwEan8Checksum = view.findViewById(R.id.sw_ean8_checksum);
-        mSwEan8Checksum.setOnCheckedChangeListener(this);
         int ean8Checksum = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN8_CHECK_DIGIT_TRANSMIT);
-        mSwEan8Checksum.setChecked(ean8Checksum == 1);
-
-        mSwEan8Digit2 = view.findViewById(R.id.sw_ean8_digit_2);
-        mSwEan8Digit2.setOnCheckedChangeListener(this);
+        bindingView.swEan8Checksum.setChecked(ean8Checksum == 1);
         int ean8Digit2 = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN8_2CHAR_ADDENDA_ENABLED);
-        mSwEan8Digit2.setChecked(ean8Digit2 == 1);
-
-        mSwEan8Digit5 = view.findViewById(R.id.sw_ean8_digit_5);
-        mSwEan8Digit5.setOnCheckedChangeListener(this);
+        bindingView.swEan8Digit2.setChecked(ean8Digit2 == 1);
         int ean8Digit5 = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN8_5CHAR_ADDENDA_ENABLED);
-        mSwEan8Digit5.setChecked(ean8Digit5 == 1);
-
-        mSwEan8Required = view.findViewById(R.id.sw_ean8_required);
-        mSwEan8Required.setOnCheckedChangeListener(this);
+        bindingView.swEan8Digit5.setChecked(ean8Digit5 == 1);
         int ean8Required = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN8_ADDENDA_REQUIRED);
-        mSwEan8Required.setChecked(ean8Required == 1);
-
-        mSwEan8Separator = view.findViewById(R.id.sw_ean8_separator);
-        mSwEan8Separator.setOnCheckedChangeListener(this);
+        bindingView.swEan8Required.setChecked(ean8Required == 1);
         int ean8Separator = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN8_ADDENDA_SEPARATOR);
-        mSwEan8Separator.setChecked(ean8Separator == 1);
-
+        bindingView.swEan8Separator.setChecked(ean8Separator == 1);
 
         // EAN13
-        mSwCheckSum = view.findViewById(R.id.sw_checksum);
-        mSwCheckSum.setOnCheckedChangeListener(this);
         int checkSumDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN13_CHECK_DIGIT_TRANSMIT);
-        mSwCheckSum.setChecked(checkSumDef == 1);
-
-        mSw2Addon = view.findViewById(R.id.sw_2addon);
-        mSw2Addon.setOnCheckedChangeListener(this);
+        bindingView.swChecksum.setChecked(checkSumDef == 1);
         int twoAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN13_2CHAR_ADDENDA_ENABLED);
-        mSw2Addon.setChecked(twoAddonDef == 1);
-
-        mSw5Addon = view.findViewById(R.id.sw_5addon);
-        mSw5Addon.setOnCheckedChangeListener(this);
+        bindingView.sw2addon.setChecked(twoAddonDef == 1);
         int fiveAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN13_5CHAR_ADDENDA_ENABLED);
-        mSw5Addon.setChecked(fiveAddonDef == 1);
-
-        mSwRequiredAddon = view.findViewById(R.id.sw_required_addon);
-        mSwRequiredAddon.setOnCheckedChangeListener(this);
+        bindingView.sw5addon.setChecked(fiveAddonDef == 1);
         int requiredAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN13_ADDENDA_REQUIRED);
-        mSwRequiredAddon.setChecked(requiredAddonDef == 1);
-
-        mSwSeparatorAddon = view.findViewById(R.id.sw_separator_addon);
-        mSwSeparatorAddon.setOnCheckedChangeListener(this);
+        bindingView.swRequiredAddon.setChecked(requiredAddonDef == 1);
         int separatorAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN13_ADDENDA_SEPARATOR);
-        mSwSeparatorAddon.setChecked(separatorAddonDef == 1);
-
+        bindingView.swSeparatorAddon.setChecked(separatorAddonDef == 1);
 
         // Matrix25
-        mCheckDigitSpinner = view.findViewById(R.id.sp_check_digit);
         int checkDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_M25_CHECK_DIGIT_MODE);
-        mCheckDigitSpinner.setSelection(checkDigitDef);
-        mCheckDigitSpinner.setOnItemSelectedListener(this);
-
+        bindingView.spCheckDigit.setSelection(checkDigitDef);
 
         // UPCA
-        mSwUpcCheckSum = view.findViewById(R.id.sw_upc_checksum);
-        mSwUpcCheckSum.setOnCheckedChangeListener(this);
         int upcCheckSumDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_CHECK_DIGIT_TRANSMIT);
-        mSwUpcCheckSum.setChecked(upcCheckSumDef == 1);
-
-        mSwUpcNumberSystemCheck = view.findViewById(R.id.sw_upc_number_check);
-        mSwUpcNumberSystemCheck.setOnCheckedChangeListener(this);
+        bindingView.swUpcChecksum.setChecked(upcCheckSumDef == 1);
         int numberSystemDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_NUMBER_SYSTEM_TRANSMIT);
-        mSwUpcNumberSystemCheck.setChecked(numberSystemDef == 1);
-
-        mSwUpc2Addon = view.findViewById(R.id.sw_upc_2addon);
-        mSwUpc2Addon.setOnCheckedChangeListener(this);
+        bindingView.swUpcNumberCheck.setChecked(numberSystemDef == 1);
         int upcTwoAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_2CHAR_ADDENDA_ENABLED);
-        mSwUpc2Addon.setChecked(upcTwoAddonDef == 1);
-
-        mSwUpc5Addon = view.findViewById(R.id.sw_upc_5addon);
-        mSwUpc5Addon.setOnCheckedChangeListener(this);
+        bindingView.swUpc2addon.setChecked(upcTwoAddonDef == 1);
         int upcFiveAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_5CHAR_ADDENDA_ENABLED);
-        mSwUpc5Addon.setChecked(upcFiveAddonDef == 1);
-
-        mSwUpcRequiredAddon = view.findViewById(R.id.sw_upc_required_addon);
-        mSwUpcRequiredAddon.setOnCheckedChangeListener(this);
+        bindingView.swUpc5addon.setChecked(upcFiveAddonDef == 1);
         int upcRequiredAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_ADDENDA_REQUIRED);
-        mSwUpcRequiredAddon.setChecked(upcRequiredAddonDef == 1);
-
-        mSwUpcSeparatorAddon = view.findViewById(R.id.sw_upc_separator_addon);
-        mSwUpcSeparatorAddon.setOnCheckedChangeListener(this);
+        bindingView.swUpcRequiredAddon.setChecked(upcRequiredAddonDef == 1);
         int upcSeparatorAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_ADDENDA_SEPARATOR);
-        mSwUpcSeparatorAddon.setChecked(upcSeparatorAddonDef == 1);
-
-        mSwUpcCountryCode = view.findViewById(R.id.sw_upc_country_code);
-        mSwUpcCountryCode.setOnCheckedChangeListener(this);
+        bindingView.swUpcSeparatorAddon.setChecked(upcSeparatorAddonDef == 1);
         int countryCodeDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_ADD_COUNTRY_CODE);
-        mSwUpcCountryCode.setChecked(countryCodeDef == 1);
+        bindingView.swUpcCountryCode.setChecked(countryCodeDef == 1);
     }
 
-    @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (buttonView.getId() == R.id.sw_qrcode_enable) {
-            // Enable/disable QRCode
-            XcBarcodeScanner.enableBarcodeType(BarcodeType.QRCODE, isChecked);
+        Log.d(TAG, "[onCheckedChanged] viewId = " + buttonView.getId() + ", isChecked = " + isChecked);
+        if (buttonView.getId() == R.id.sw_code11_enable) {
+            // Enable/disable Code11
+            XcBarcodeScanner.enableBarcodeType(BarcodeType.CODE11, isChecked);
         } else if (buttonView.getId() == R.id.sw_checksum) {
             XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_EAN13_CHECK_DIGIT_TRANSMIT, isChecked ? 1 : 0);
         } else if (buttonView.getId() == R.id.sw_2addon) {
@@ -254,38 +187,67 @@ public class BarcodeOptionsFragment extends BaseFragment implements CompoundButt
             XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_EAN8_ADDENDA_REQUIRED, isChecked ? 1 : 0);
         } else if (buttonView.getId() == R.id.sw_ean8_separator) {
             XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_EAN8_ADDENDA_SEPARATOR, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_code128_separator) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_C128_SEPARATOR_ENABLED, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_codabar_transmit_char) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODABAR_START_STOP_TRANSMIT, isChecked ? 1 : 0);
         }
     }
 
-    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getId() == R.id.sp_check_digit) {
-            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_M25_CHECK_DIGIT_MODE, position);
+        Log.d(TAG, "[onItemSelected] viewId = " + parent.getId() + ", position = " + position);
+        if (parent.getId() == R.id.sp_code11_check_digit) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE11_CHECK_DIGIT_MODE, position);
         } else if (parent.getId() == R.id.sp_code39_check_digit) {
             XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE39_CHECK_DIGIT_MODE, position);
+        } else if (parent.getId() == R.id.sp_check_digit) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_M25_CHECK_DIGIT_MODE, position);
+        } else if (parent.getId() == R.id.sp_codabar_check_digit) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODABAR_CHECK_DIGIT_MODE, position);
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         Log.d(TAG, "[onEditorAction] actionId = " + actionId + ", TextView = " + v.getId());
         String val = v.getText().toString().trim();
         if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT
                 || actionId == EditorInfo.IME_ACTION_PREVIOUS || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
             switch (v.getId()) {
+                case R.id.et_code11_max_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE11_MAX_LENGTH, val.isEmpty() ? 127 : Integer.parseInt(val));
+                    break;
+                case R.id.et_code11_min_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE11_MIN_LENGTH, val.isEmpty() ? 6 : Integer.parseInt(val));
+                    break;
                 case R.id.et_code39_max_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE39_MAX_LENGTH, val.isEmpty() ? 127 : Integer.parseInt(val));
                     break;
                 case R.id.et_code39_min_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE39_MIN_LENGTH, val.isEmpty() ? 1 : Integer.parseInt(val));
                     break;
+                case R.id.et_code49_max_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE49_MAX_LENGTH, val.isEmpty() ? 127 : Integer.parseInt(val));
+                    break;
+                case R.id.et_code49_min_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE49_MIN_LENGTH, val.isEmpty() ? 1 : Integer.parseInt(val));
+                    break;
+                case R.id.et_code93_max_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE93_MAX_LENGTH, val.isEmpty() ? 127 : Integer.parseInt(val));
+                    break;
+                case R.id.et_code93_min_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE93_MIN_LENGTH, val.isEmpty() ? 2 : Integer.parseInt(val));
+                    break;
+                case R.id.et_code128_max_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE128_MAX_LENGTH, val.isEmpty() ? 127 : Integer.parseInt(val));
+                    break;
+                case R.id.et_code128_min_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE128_MIN_LENGTH, val.isEmpty() ? 1 : Integer.parseInt(val));
+                    break;
                 case R.id.et_output_max_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_DATAMATRIX_OUTPUT_MAX_LENGTH, val.isEmpty() ? 0 : Integer.parseInt(val));
+                    break;
+                case R.id.et_codabar_min_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODABAR_MIN_LENGTH, val.isEmpty() ? 4 : Integer.parseInt(val));
                     break;
                 default:
                     break;

@@ -91,10 +91,20 @@
     <string name="transmit_start_stop_char">输出起始和结束字符</string>
     <string name="code39_full_asc">Code 39 Full ASCII</string>
     <string name="code39_base32">支持Code32解码</string>
-    <string name="code39_max_length_tip">最大长度（1-127）</string>
-    <string name="code39_min_length_tip">最小长度（1-127）</string>
+    <string name="max_length_tip_1_127">最大长度（1-127）</string>
+    <string name="min_length_tip_1_127">最小长度（1-127）</string>
     <string name="txt_data_matrix">DATA MATRIX</string>
     <string name="text_with_separators">显示分隔符</string>
     <string name="setting_max_output_length">最大输出长度（0：不限制）</string>
     <string name="txt_ean8">EAN-8</string>
+    <string name="txt_code11">Code11</string>
+    <string name="code11_max_length_tip">最大长度（6-127）</string>
+    <string name="code11_min_length_tip">最小长度（6-127）</string>
+    <string name="txt_code49">Code49</string>
+    <string name="txt_code93">Code93</string>
+    <string name="max_length_tip_2_127">最大长度（2-127）</string>
+    <string name="min_length_tip_2_127">最小长度（2-127）</string>
+    <string name="txt_code128">Code128</string>
+    <string name="txt_codabar">Codabar</string>
+    <string name="min_length_tip_4_127">最小长度（4-127）</string>
 </resources>

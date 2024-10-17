@@ -186,4 +186,32 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <string-array name="code11_check_digit_setting_entries">
+        <item>校验两位并输出校验码</item>
+        <item>校验一位并输出校验码</item>
+        <item>校验两位不输出校验码</item>
+        <item>校验一位不输出校验码</item>
+        <item>不校验</item>
+    </string-array>
+
+    <string-array name="code11_check_digit_setting_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="codabar_check_digit_entries">
+        <item>关闭校验</item>
+        <item>开启校验不输出</item>
+        <item>开启校验并输出</item>
+    </string-array>
+
+    <string-array name="codabar_check_digit_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

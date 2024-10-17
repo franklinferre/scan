@@ -90,10 +90,20 @@
     <string name="transmit_start_stop_char">Transmit start/stop char</string>
     <string name="code39_full_asc">Code 39 Full ASCII</string>
     <string name="code39_base32">Code39 Base32 decode</string>
-    <string name="code39_max_length_tip">Maximum length(1-127)</string>
-    <string name="code39_min_length_tip">Minimum length(1-127)</string>
+    <string name="max_length_tip_1_127">Maximum length(1-127)</string>
+    <string name="min_length_tip_1_127">Minimum length(1-127)</string>
     <string name="txt_data_matrix">DATA MATRIX</string>
     <string name="text_with_separators">With Separators</string>
     <string name="setting_max_output_length">Max out length (0: no limit)</string>
     <string name="txt_ean8">EAN-8</string>
+    <string name="txt_code11">Code11</string>
+    <string name="code11_max_length_tip">Maximum length(6-127)</string>
+    <string name="code11_min_length_tip">Minimum length(6-127)</string>
+    <string name="txt_code49">Code49</string>
+    <string name="txt_code93">Code93</string>
+    <string name="max_length_tip_2_127">Maximum length(2-127)</string>
+    <string name="min_length_tip_2_127">Minimum length(2-127)</string>
+    <string name="txt_code128">Code128</string>
+    <string name="txt_codabar">Codabar</string>
+    <string name="min_length_tip_4_127">Minimum length(4-127)</string>
 </resources>
