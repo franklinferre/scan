@@ -74,7 +74,6 @@
 
     <!-- Barcode Settings -->
     <string name="txt_barcode_enable">Enable</string>
-    <string name="txt_qrcode">QR Code</string>
     <string name="txt_ean13">EAN-13</string>
     <string name="transmit_check_digit">Transmit check digit</string>
     <string name="check_digit_options">Check digit options</string>
@@ -106,4 +105,15 @@
     <string name="txt_code128">Code128</string>
     <string name="txt_codabar">Codabar</string>
     <string name="min_length_tip_4_127">Minimum length(4-127)</string>
+    <string name="txt_gs1_128">GS1-128</string>
+    <string name="txt_gs1_databar">GS1 DATABAR</string>
+    <string name="text_gs1_expanded">GS1 DataBar Expanded</string>
+    <string name="text_gs1_limited">GS1 DataBar Limited</string>
+    <string name="txt_itf25">ITF25</string>
+    <string name="txt_msi">MSI</string>
+    <string name="min_length_tip_0_55">Minimum length(0-55)</string>
+    <string name="txt_qrcode">QR CODE</string>
+    <string name="text_mqr_enable">MicroQR Enable</string>
+    <string name="txt_upce">UPC-E</string>
+    <string name="upce_expand">UPCE expansion</string>
 </resources>

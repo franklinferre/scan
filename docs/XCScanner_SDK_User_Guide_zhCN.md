@@ -20,6 +20,8 @@
 | 1.1.9   | 2024/08/26 | 增加获取/配置EAN13、Matrix25、UPCA条码属性接口。                          |
 | 1.1.10  | 2024/09/24 | 增加获取/配置扫码触发模式接口。                                           |
 | 1.1.11  | 2024/10/10 | 增加获取/配置Code39、DATAMATRIX、EAN8条码属性接口。                       |
+| 1.1.12  | 2024/10/17 | 增加获取/配置code11、coded49、code93、code128、codeabar条码属性接口。       |
+| 1.1.13  | 2024/10/18 | 增加获取/配置GS1-128、GS1-DATABAR、ITF25、MSI、QRCode、UPCE条码属性接口。    |
 
 
 # 功能使用
@@ -705,6 +707,16 @@ int getDecoderTagValue(int tag);
 
 ```
 public class XCBarcodeTag {
+    // Code11
+    // 最小长度（6-127）。取值范围为6-127的整数。
+    public static final int TAG_CODE11_MIN_LENGTH            = 0x1A01E002;
+    // 最大长度（6-127）。取值范围为6-127的整数。
+    public static final int TAG_CODE11_MAX_LENGTH            = 0x1A01E003;
+    // 校验码选项
+    // 0：校验两位并输出校验码；1：校验一位并输出校验码；2：校验两位不输出校验码；
+    // 3：校验一位不输出校验码；4：不校验
+    public static final int TAG_CODE11_CHECK_DIGIT_MODE      = 0x1A01E004;
+
     // Code39
     // 校验码选项。0：关闭校验；1：开启校验不输出；2：开启校验并输出。
     public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
@@ -718,7 +730,35 @@ public class XCBarcodeTag {
     public static final int TAG_CODE39_MAX_LENGTH            = 0x1A016003;
     // 最小长度（1-127）。取值范围为1-127的整数。
     public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
-
+    
+    // Code49
+    // 最小长度（1-127）。取值范围为1-127的整数。 
+    public static final int TAG_CODE49_MIN_LENGTH            = 0x0C035002;
+    // 最大长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE49_MAX_LENGTH            = 0x0C035003;
+    
+    // Code93
+    // 最大长度（2-127）。取值范围为2-127的整数。
+    public static final int TAG_CODE93_MAX_LENGTH            = 0x1A01D003;
+    // 最小长度（2-127）。取值范围为2-127的整数。
+    public static final int TAG_CODE93_MIN_LENGTH            = 0x1A01D002;
+    
+    // code128
+    // 显示分隔符。1：显示；0：不显示。
+    public static final int TAG_C128_SEPARATOR_ENABLED       = 0x1A014006;
+    // 最大长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE128_MAX_LENGTH           = 0x1A014003;
+    // 最小长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE128_MIN_LENGTH           = 0x1A014002;
+    
+    // Codabar
+    // 校验码选项。0：关闭校验；1：开启校验不输出；2：开启校验并输出。
+    public static final int TAG_CODABAR_CHECK_DIGIT_MODE     = 0x1A01F005;
+    // 输出起始和结束字符。1：开启；0：关闭。
+    public static final int TAG_CODABAR_START_STOP_TRANSMIT  = 0x1A01F004;
+    // 最小长度（4-127）。取值范围为4-127的整数。
+    public static final int TAG_CODABAR_MIN_LENGTH           = 0x1A01F002;
+    
     // DataMatrix
     // 显示分隔符。1：显示；0：隐藏
     public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
@@ -749,9 +789,40 @@ public class XCBarcodeTag {
     // 附加码前加分隔符。1：开启；0：关闭
     public static final int TAG_EAN13_ADDENDA_SEPARATOR      = 0x1A013006;
 
-    //Matrix 2 of 5
+    // GS1 128
+    // 显示分隔符。1：显示；0：隐藏
+    public static final int TAG_GS1_128_SEPARATOR_ENABLED    = 0x1A015004;
+    
+    // GS1 DATABAR
+    // GS1 DataBar Limited。1：开启；0：关闭
+    public static final int TAG_RSS_LIMITED_ENABLED          = 0x1A022002;
+    // GS1 DataBar Expanded。1：开启；0：关闭
+    public static final int TAG_RSS_EXPANDED_ENABLED         = 0x1A022003;
+    
+    // ITF25
+    // 校验码选项。0：不校验；1：校验但不输出校验码；2：校验并输出校验码。
+    public static final int TAG_I25_CHECK_DIGIT_MODE         = 0x1A019004;
+    // 最大长度（2-127）。取值范围为2-127的整数。
+    public static final int TAG_I25_MAX_LENGTH               = 0x1A019003;
+    // 最小长度（2-127）。取值范围为2-127的整数。
+    public static final int TAG_I25_MIN_LENGTH               = 0x1A019002;
+    
+    // Matrix 2 of 5
     // 校验码选项。0：关闭校验；1：开启校验并输出；2：开启校验不输出。
     public static final int TAG_M25_CHECK_DIGIT_MODE         = 0x1A01C004;
+    
+    // MSI
+    // 校验码选项。0：关闭；1：模式10并输出；2：模式10但不输出；
+    // 3：模式10/10并输出；4：模式10/10但不输出；5：模式11/10并输出；6：模式11/10但不输出。
+    public static final int TAG_MSI_CHECK_DIGIT_MODE         = 0x1A021004;
+    // 最小长度（0-55）。取值范围为0-55的整数。
+    public static final int TAG_MSI_MIN_LENGTH               = 0x1A021002;
+    
+    // QRCode
+    // MicroQR支持。1：开启；0：关闭。
+    public static final int TAG_QR_ENABLED                   = 0x1A02A001;
+    // 最大输出长度（0：不限制）。
+    public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
 
     // UPC-A
     // 输出校验码。1：开启；0：关闭 
@@ -768,6 +839,22 @@ public class XCBarcodeTag {
     public static final int TAG_UPCA_ADDENDA_SEPARATOR       = 0x1A010007;
     // 转换为EAN13。1：开启；0：关闭
     public static final int TAG_UPCA_ADD_COUNTRY_CODE        = 0x1A010008;
+    
+    // UPC-E
+    // UPCE扩充。1：开启；0：关闭。
+    public static final int TAG_UPCE_EXPAND                  = 0x1A011003;
+    // 输出校验码。1：开启；0：关闭。
+    public static final int TAG_UPCE_CHECK_DIGIT_TRANSMIT    = 0x1A011004;
+    // 输出数制码。1：开启；0：关闭。
+    public static final int TAG_UPCE_NUMBER_SYSTEM_TRANSMIT  = 0x1A011005;
+    // 支持2位附加码。1：开启；0：关闭。
+    public static final int TAG_UPCE_2CHAR_ADDENDA_ENABLED   = 0x1A011006;
+    // 支持5位附加码。1：开启；0：关闭。
+    public static final int TAG_UPCE_5CHAR_ADDENDA_ENABLED   = 0x1A011007;
+    // 强制要求附加码。1：开启；0：关闭。
+    public static final int TAG_UPCE_ADDENDA_REQUIRED        = 0x1A011008;
+    // 附加码前加分隔符。1：开启；0：关闭。
+    public static final int TAG_UPCE_ADDENDA_SEPARATOR       = 0x1A011009;
 }
 ```
 
@@ -796,6 +883,16 @@ void setDecoderTag(int tag, int value);
 
 ```
 public class XCBarcodeTag {
+    // Code11
+    // 最小长度（6-127）。取值范围为6-127的整数。
+    public static final int TAG_CODE11_MIN_LENGTH            = 0x1A01E002;
+    // 最大长度（6-127）。取值范围为6-127的整数。
+    public static final int TAG_CODE11_MAX_LENGTH            = 0x1A01E003;
+    // 校验码选项
+    // 0：校验两位并输出校验码；1：校验一位并输出校验码；2：校验两位不输出校验码；
+    // 3：校验一位不输出校验码；4：不校验
+    public static final int TAG_CODE11_CHECK_DIGIT_MODE      = 0x1A01E004;
+
     // Code39
     // 校验码选项。0：关闭校验；1：开启校验不输出；2：开启校验并输出。
     public static final int TAG_CODE39_CHECK_DIGIT_MODE      = 0x1A016004;
@@ -809,7 +906,35 @@ public class XCBarcodeTag {
     public static final int TAG_CODE39_MAX_LENGTH            = 0x1A016003;
     // 最小长度（1-127）。取值范围为1-127的整数。
     public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
-
+    
+    // Code49
+    // 最小长度（1-127）。取值范围为1-127的整数。 
+    public static final int TAG_CODE49_MIN_LENGTH            = 0x0C035002;
+    // 最大长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE49_MAX_LENGTH            = 0x0C035003;
+    
+    // Code93
+    // 最大长度（2-127）。取值范围为2-127的整数。
+    public static final int TAG_CODE93_MAX_LENGTH            = 0x1A01D003;
+    // 最小长度（2-127）。取值范围为2-127的整数。
+    public static final int TAG_CODE93_MIN_LENGTH            = 0x1A01D002;
+    
+    // code128
+    // 显示分隔符。1：显示；0：不显示。
+    public static final int TAG_C128_SEPARATOR_ENABLED       = 0x1A014006;
+    // 最大长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE128_MAX_LENGTH           = 0x1A014003;
+    // 最小长度（1-127）。取值范围为1-127的整数。
+    public static final int TAG_CODE128_MIN_LENGTH           = 0x1A014002;
+    
+    // Codabar
+    // 校验码选项。0：关闭校验；1：开启校验不输出；2：开启校验并输出。
+    public static final int TAG_CODABAR_CHECK_DIGIT_MODE     = 0x1A01F005;
+    // 输出起始和结束字符。1：开启；0：关闭。
+    public static final int TAG_CODABAR_START_STOP_TRANSMIT  = 0x1A01F004;
+    // 最小长度（4-127）。取值范围为4-127的整数。
+    public static final int TAG_CODABAR_MIN_LENGTH           = 0x1A01F002;
+    
     // DataMatrix
     // 显示分隔符。1：显示；0：隐藏
     public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
@@ -840,9 +965,40 @@ public class XCBarcodeTag {
     // 附加码前加分隔符。1：开启；0：关闭
     public static final int TAG_EAN13_ADDENDA_SEPARATOR      = 0x1A013006;
 
-    //Matrix 2 of 5
+    // GS1 128
+    // 显示分隔符。1：显示；0：隐藏
+    public static final int TAG_GS1_128_SEPARATOR_ENABLED    = 0x1A015004;
+    
+    // GS1 DATABAR
+    // GS1 DataBar Limited。1：开启；0：关闭
+    public static final int TAG_RSS_LIMITED_ENABLED          = 0x1A022002;
+    // GS1 DataBar Expanded。1：开启；0：关闭
+    public static final int TAG_RSS_EXPANDED_ENABLED         = 0x1A022003;
+    
+    // ITF25
+    // 校验码选项。0：不校验；1：校验但不输出校验码；2：校验并输出校验码。
+    public static final int TAG_I25_CHECK_DIGIT_MODE         = 0x1A019004;
+    // 最大长度（2-127）。取值范围为2-127的整数。
+    public static final int TAG_I25_MAX_LENGTH               = 0x1A019003;
+    // 最小长度（2-127）。取值范围为2-127的整数。
+    public static final int TAG_I25_MIN_LENGTH               = 0x1A019002;
+    
+    // Matrix 2 of 5
     // 校验码选项。0：关闭校验；1：开启校验并输出；2：开启校验不输出。
     public static final int TAG_M25_CHECK_DIGIT_MODE         = 0x1A01C004;
+    
+    // MSI
+    // 校验码选项。0：关闭；1：模式10并输出；2：模式10但不输出；
+    // 3：模式10/10并输出；4：模式10/10但不输出；5：模式11/10并输出；6：模式11/10但不输出。
+    public static final int TAG_MSI_CHECK_DIGIT_MODE         = 0x1A021004;
+    // 最小长度（0-55）。取值范围为0-55的整数。
+    public static final int TAG_MSI_MIN_LENGTH               = 0x1A021002;
+    
+    // QRCode
+    // MicroQR支持。1：开启；0：关闭。
+    public static final int TAG_QR_ENABLED                   = 0x1A02A001;
+    // 最大输出长度（0：不限制）。
+    public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
 
     // UPC-A
     // 输出校验码。1：开启；0：关闭 
@@ -859,6 +1015,22 @@ public class XCBarcodeTag {
     public static final int TAG_UPCA_ADDENDA_SEPARATOR       = 0x1A010007;
     // 转换为EAN13。1：开启；0：关闭
     public static final int TAG_UPCA_ADD_COUNTRY_CODE        = 0x1A010008;
+    
+    // UPC-E
+    // UPCE扩充。1：开启；0：关闭。
+    public static final int TAG_UPCE_EXPAND                  = 0x1A011003;
+    // 输出校验码。1：开启；0：关闭。
+    public static final int TAG_UPCE_CHECK_DIGIT_TRANSMIT    = 0x1A011004;
+    // 输出数制码。1：开启；0：关闭。
+    public static final int TAG_UPCE_NUMBER_SYSTEM_TRANSMIT  = 0x1A011005;
+    // 支持2位附加码。1：开启；0：关闭。
+    public static final int TAG_UPCE_2CHAR_ADDENDA_ENABLED   = 0x1A011006;
+    // 支持5位附加码。1：开启；0：关闭。
+    public static final int TAG_UPCE_5CHAR_ADDENDA_ENABLED   = 0x1A011007;
+    // 强制要求附加码。1：开启；0：关闭。
+    public static final int TAG_UPCE_ADDENDA_REQUIRED        = 0x1A011008;
+    // 附加码前加分隔符。1：开启；0：关闭。
+    public static final int TAG_UPCE_ADDENDA_SEPARATOR       = 0x1A011009;
 }
 ```
 

@@ -75,7 +75,6 @@
 
     <!-- Barcode Settings -->
     <string name="txt_barcode_enable">开启</string>
-    <string name="txt_qrcode">QR Code</string>
     <string name="txt_ean13">EAN-13</string>
     <string name="transmit_check_digit">输出校验码</string>
     <string name="check_digit_options">校验码选项</string>
@@ -107,4 +106,15 @@
     <string name="txt_code128">Code128</string>
     <string name="txt_codabar">Codabar</string>
     <string name="min_length_tip_4_127">最小长度（4-127）</string>
+    <string name="txt_gs1_128">GS1-128</string>
+    <string name="txt_gs1_databar">GS1 DATABAR</string>
+    <string name="text_gs1_expanded">GS1 DataBar Expanded</string>
+    <string name="text_gs1_limited">GS1 DataBar Limited</string>
+    <string name="txt_itf25">ITF25</string>
+    <string name="txt_msi">MSI</string>
+    <string name="min_length_tip_0_55">最小长度（0-55）</string>
+    <string name="txt_qrcode">QR CODE</string>
+    <string name="text_mqr_enable">MicroQR支持</string>
+    <string name="txt_upce">UPC-E</string>
+    <string name="upce_expand">UPCE扩充</string>
 </resources>

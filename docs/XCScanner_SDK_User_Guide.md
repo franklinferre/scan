@@ -20,6 +20,8 @@
 | 1.1.9       | 2024/08/26 | Add API to support set/get properties for the EAN13/Matrix25/UPCA symbology                                                                                                                     |
 | 1.1.10      | 2024/09/24 | Add API to support set/get properties for the scan trigger mode.                                                                                                                                |
 | 1.1.11      | 2024/10/10 | Add API to support set/get properties for the Code39/DATAMATRIX/EAN8 symbology                                                                                                                  |
+| 1.1.12      | 2024/10/17 | Add API to support set/get properties for the code11/coded49/code93/code128/codeabar symbology                                                                                                  |
+| 1.1.13      | 2024/10/18 | Add API to support set/get properties for the GS1-128/GS1-DATABAR/ITF25/MSI/QRCode/UPCE symbology                                                                                               |
 
 
 # Basic function
@@ -704,6 +706,18 @@ The properties that support queries are defined in the XCBarcodeTag class:
 
 ```
 public class XCBarcodeTag {
+    // Code11
+    // Minimum length(6-127).
+    // The range of values is integers from 6 to 127.   
+    public static final int TAG_CODE11_MIN_LENGTH            = 0x1A01E002;
+    // Maximum length(6-127).
+    // The range of values is integers from 6 to 127.
+    public static final int TAG_CODE11_MAX_LENGTH            = 0x1A01E003;
+    // Check digit options
+    // 0:Two Check Digits Output;1:One Check Digit Output;2:Two Check Digits No Output;
+    // 3:One Check Digit No Output;4:Disable Check Digit
+    public static final int TAG_CODE11_CHECK_DIGIT_MODE      = 0x1A01E004;
+
     // Code39
     // Check digit options.
     // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output.
@@ -712,7 +726,7 @@ public class XCBarcodeTag {
     // 1:enable;0:disable
     public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
     // Code 39 Full ASCII.
-	// 1:enable;0:disable
+    // 1:enable;0:disable
     public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
     // Code39 Base32 decode.
     // 1:enable;0:disable
@@ -723,7 +737,45 @@ public class XCBarcodeTag {
     // Minimum length(1-127).
     // The range of values is integers from 1 to 127.
     public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
-
+    
+    // Code49
+    // Minimum length(1-127).
+    // The range of values is integers from 1 to 127.   
+    public static final int TAG_CODE49_MIN_LENGTH            = 0x0C035002;
+    // Maximum length(1-127).
+    // The range of values is integers from 1 to 127.
+    public static final int TAG_CODE49_MAX_LENGTH            = 0x0C035003;
+    
+    // Code93
+    // Maximum length(2-127).
+    // The range of values is integers from 2 to 127.
+    public static final int TAG_CODE93_MAX_LENGTH            = 0x1A01D003;
+    // Minimum length(2-127).
+    // The range of values is integers from 2 to 127. 
+    public static final int TAG_CODE93_MIN_LENGTH            = 0x1A01D002;
+    
+    // code128
+    // With Separators
+    // 1:enable;0:disable
+    public static final int TAG_C128_SEPARATOR_ENABLED       = 0x1A014006;
+    // Maximum length(1-127).
+    // The range of values is integers from 1 to 127.
+    public static final int TAG_CODE128_MAX_LENGTH           = 0x1A014003;
+    // Minimum length(1-127).
+    // The range of values is integers from 1 to 127. 
+    public static final int TAG_CODE128_MIN_LENGTH           = 0x1A014002;
+    
+    // Codabar
+    // Check digit options
+    // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output
+    public static final int TAG_CODABAR_CHECK_DIGIT_MODE     = 0x1A01F005;
+    // Transmit start/stop char
+    // 1:enable;0:disable
+    public static final int TAG_CODABAR_START_STOP_TRANSMIT  = 0x1A01F004;
+    // Minimum length(4-127).
+    // The range of values is integers from 4 to 127. 
+    public static final int TAG_CODABAR_MIN_LENGTH           = 0x1A01F002;
+    
     // DataMatrix
     // With Separators.
     // 1:display;0:hide
@@ -764,11 +816,51 @@ public class XCBarcodeTag {
     public static final int TAG_EAN13_ADDENDA_REQUIRED       = 0x1A013005;
     // Addenda add Separator.1:enable;0:disable
     public static final int TAG_EAN13_ADDENDA_SEPARATOR      = 0x1A013006;
+    
+    // GS1 128
+    // With Separators
+    // 1:display;0:hide
+    public static final int TAG_GS1_128_SEPARATOR_ENABLED    = 0x1A015004;
+    
+    // GS1 DATABAR
+    // GS1 DataBar Limited
+    // 1:enable;0:disable
+    public static final int TAG_RSS_LIMITED_ENABLED          = 0x1A022002;
+    // GS1 DataBar Expanded
+    // 1:enable;0:disable
+    public static final int TAG_RSS_EXPANDED_ENABLED         = 0x1A022003;
+    
+    // ITF25
+    // Check digit options
+    // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output.
+    public static final int TAG_I25_CHECK_DIGIT_MODE         = 0x1A019004;
+    // Maximum length(2-127).
+    // The range of values is integers from 2 to 127.
+    public static final int TAG_I25_MAX_LENGTH               = 0x1A019003;
+    // Minimum length(2-127).
+    // The range of values is integers from 2 to 127. 
+    public static final int TAG_I25_MIN_LENGTH               = 0x1A019002;
 
     // Matrix 2 of 5
     // Check digit options.
     // 0:Disable Check Digit;1:Enable Check Digit and Output;2:Enable Check Digit and No Output.
     public static final int TAG_M25_CHECK_DIGIT_MODE         = 0x1A01C004;
+    
+    // MSI
+    // Check digit options
+    // 0:Disable;1:Mod 10 and output;2:Mod 10 without output;3:Mod 10/10 and output;
+    // 4:Mod 10/10 without output;5:Mod 11/10 and output;6:Mod 11/10 without output.
+    public static final int TAG_MSI_CHECK_DIGIT_MODE         = 0x1A021004;
+    // Minimum length(0-55).
+    // The range of values is integers from 0 to 55. 
+    public static final int TAG_MSI_MIN_LENGTH               = 0x1A021002;
+    
+    // QRCode
+    // MicroQR Enable
+    // 1:enable;0:disable
+    public static final int TAG_QR_ENABLED                   = 0x1A02A001;
+    // Max out length (0: no limit).
+    public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
 
     // UPC-A
     // Transmit check digit.
@@ -792,6 +884,29 @@ public class XCBarcodeTag {
     // Convert to EAN13.
     // 1:enable;0:disable
     public static final int TAG_UPCA_ADD_COUNTRY_CODE        = 0x1A010008;
+    
+    // UPC-E
+    // UPCE expansion
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_EXPAND                  = 0x1A011003;
+    // Transmit check digit
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_CHECK_DIGIT_TRANSMIT    = 0x1A011004;
+    // Number system digit
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_NUMBER_SYSTEM_TRANSMIT  = 0x1A011005;
+    // 2 Digit Addenda
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_2CHAR_ADDENDA_ENABLED   = 0x1A011006;
+    // 5 Digit Addenda
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_5CHAR_ADDENDA_ENABLED   = 0x1A011007;
+    // Addenda Required
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_ADDENDA_REQUIRED        = 0x1A011008;
+    // Addenda add Separator
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_ADDENDA_SEPARATOR       = 0x1A011009;
 }
 ```
 
@@ -823,6 +938,18 @@ The properties that support queries are defined in the XCBarcodeTag class:
 
 ```
 public class XCBarcodeTag {
+    // Code11
+    // Minimum length(6-127).
+    // The range of values is integers from 6 to 127.   
+    public static final int TAG_CODE11_MIN_LENGTH            = 0x1A01E002;
+    // Maximum length(6-127).
+    // The range of values is integers from 6 to 127.
+    public static final int TAG_CODE11_MAX_LENGTH            = 0x1A01E003;
+    // Check digit options
+    // 0:Two Check Digits Output;1:One Check Digit Output;2:Two Check Digits No Output;
+    // 3:One Check Digit No Output;4:Disable Check Digit
+    public static final int TAG_CODE11_CHECK_DIGIT_MODE      = 0x1A01E004;
+
     // Code39
     // Check digit options.
     // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output.
@@ -831,7 +958,7 @@ public class XCBarcodeTag {
     // 1:enable;0:disable
     public static final int TAG_CODE39_START_STOP_TRANSMIT   = 0x1A016007;
     // Code 39 Full ASCII.
-	// 1:enable;0:disable
+    // 1:enable;0:disable
     public static final int TAG_CODE39_FULL_ASCII_ENABLED    = 0x1A016006;
     // Code39 Base32 decode.
     // 1:enable;0:disable
@@ -842,7 +969,45 @@ public class XCBarcodeTag {
     // Minimum length(1-127).
     // The range of values is integers from 1 to 127.
     public static final int TAG_CODE39_MIN_LENGTH            = 0x1A016002;
-
+    
+    // Code49
+    // Minimum length(1-127).
+    // The range of values is integers from 1 to 127.   
+    public static final int TAG_CODE49_MIN_LENGTH            = 0x0C035002;
+    // Maximum length(1-127).
+    // The range of values is integers from 1 to 127.
+    public static final int TAG_CODE49_MAX_LENGTH            = 0x0C035003;
+    
+    // Code93
+    // Maximum length(2-127).
+    // The range of values is integers from 2 to 127.
+    public static final int TAG_CODE93_MAX_LENGTH            = 0x1A01D003;
+    // Minimum length(2-127).
+    // The range of values is integers from 2 to 127. 
+    public static final int TAG_CODE93_MIN_LENGTH            = 0x1A01D002;
+    
+    // code128
+    // With Separators
+    // 1:enable;0:disable
+    public static final int TAG_C128_SEPARATOR_ENABLED       = 0x1A014006;
+    // Maximum length(1-127).
+    // The range of values is integers from 1 to 127.
+    public static final int TAG_CODE128_MAX_LENGTH           = 0x1A014003;
+    // Minimum length(1-127).
+    // The range of values is integers from 1 to 127. 
+    public static final int TAG_CODE128_MIN_LENGTH           = 0x1A014002;
+    
+    // Codabar
+    // Check digit options
+    // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output
+    public static final int TAG_CODABAR_CHECK_DIGIT_MODE     = 0x1A01F005;
+    // Transmit start/stop char
+    // 1:enable;0:disable
+    public static final int TAG_CODABAR_START_STOP_TRANSMIT  = 0x1A01F004;
+    // Minimum length(4-127).
+    // The range of values is integers from 4 to 127. 
+    public static final int TAG_CODABAR_MIN_LENGTH           = 0x1A01F002;
+    
     // DataMatrix
     // With Separators.
     // 1:display;0:hide
@@ -883,11 +1048,51 @@ public class XCBarcodeTag {
     public static final int TAG_EAN13_ADDENDA_REQUIRED       = 0x1A013005;
     // Addenda add Separator.1:enable;0:disable
     public static final int TAG_EAN13_ADDENDA_SEPARATOR      = 0x1A013006;
+    
+    // GS1 128
+    // With Separators
+    // 1:display;0:hide
+    public static final int TAG_GS1_128_SEPARATOR_ENABLED    = 0x1A015004;
+    
+    // GS1 DATABAR
+    // GS1 DataBar Limited
+    // 1:enable;0:disable
+    public static final int TAG_RSS_LIMITED_ENABLED          = 0x1A022002;
+    // GS1 DataBar Expanded
+    // 1:enable;0:disable
+    public static final int TAG_RSS_EXPANDED_ENABLED         = 0x1A022003;
+    
+    // ITF25
+    // Check digit options
+    // 0:Disable Check Digit;1:Enable Check Digit and No Output;2:Enable Check Digit and Output.
+    public static final int TAG_I25_CHECK_DIGIT_MODE         = 0x1A019004;
+    // Maximum length(2-127).
+    // The range of values is integers from 2 to 127.
+    public static final int TAG_I25_MAX_LENGTH               = 0x1A019003;
+    // Minimum length(2-127).
+    // The range of values is integers from 2 to 127. 
+    public static final int TAG_I25_MIN_LENGTH               = 0x1A019002;
 
     // Matrix 2 of 5
     // Check digit options.
     // 0:Disable Check Digit;1:Enable Check Digit and Output;2:Enable Check Digit and No Output.
     public static final int TAG_M25_CHECK_DIGIT_MODE         = 0x1A01C004;
+    
+    // MSI
+    // Check digit options
+    // 0:Disable;1:Mod 10 and output;2:Mod 10 without output;3:Mod 10/10 and output;
+    // 4:Mod 10/10 without output;5:Mod 11/10 and output;6:Mod 11/10 without output.
+    public static final int TAG_MSI_CHECK_DIGIT_MODE         = 0x1A021004;
+    // Minimum length(0-55).
+    // The range of values is integers from 0 to 55. 
+    public static final int TAG_MSI_MIN_LENGTH               = 0x1A021002;
+    
+    // QRCode
+    // MicroQR Enable
+    // 1:enable;0:disable
+    public static final int TAG_QR_ENABLED                   = 0x1A02A001;
+    // Max out length (0: no limit).
+    public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
 
     // UPC-A
     // Transmit check digit.
@@ -911,6 +1116,29 @@ public class XCBarcodeTag {
     // Convert to EAN13.
     // 1:enable;0:disable
     public static final int TAG_UPCA_ADD_COUNTRY_CODE        = 0x1A010008;
+    
+    // UPC-E
+    // UPCE expansion
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_EXPAND                  = 0x1A011003;
+    // Transmit check digit
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_CHECK_DIGIT_TRANSMIT    = 0x1A011004;
+    // Number system digit
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_NUMBER_SYSTEM_TRANSMIT  = 0x1A011005;
+    // 2 Digit Addenda
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_2CHAR_ADDENDA_ENABLED   = 0x1A011006;
+    // 5 Digit Addenda
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_5CHAR_ADDENDA_ENABLED   = 0x1A011007;
+    // Addenda Required
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_ADDENDA_REQUIRED        = 0x1A011008;
+    // Addenda add Separator
+    // 1:enable;0:disable
+    public static final int TAG_UPCE_ADDENDA_SEPARATOR       = 0x1A011009;
 }
 ```
 

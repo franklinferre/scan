@@ -38,13 +38,10 @@ public class BarcodeOptionsFragment extends BaseFragment {
         boolean isCode11Enable = XcBarcodeScanner.isBarcodeTypeEnabled(BarcodeType.CODE11);
         bindingView.swCode11Enable.setChecked(isCode11Enable);
         int code11CheckDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE11_CHECK_DIGIT_MODE);
-        Log.d("XC_CYCY", "code11CheckDigitDef pos = " + code11CheckDigitDef);
         bindingView.spCode11CheckDigit.setSelection(code11CheckDigitDef);
         int code11MaxLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE11_MAX_LENGTH);
-        Log.d("XC_CYCY", "code11MaxLengthDef = " + code11MaxLengthDef);
         bindingView.etCode11MaxLength.setText(String.valueOf(code11MaxLengthDef));
         int code11MinLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE11_MIN_LENGTH);
-        Log.d("XC_CYCY", "code11MinLengthDef = " + code11CheckDigitDef);
         bindingView.etCode11MinLength.setText(String.valueOf(code11MinLengthDef));
 
         // Code 39
@@ -119,9 +116,39 @@ public class BarcodeOptionsFragment extends BaseFragment {
         int separatorAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_EAN13_ADDENDA_SEPARATOR);
         bindingView.swSeparatorAddon.setChecked(separatorAddonDef == 1);
 
+        // GS1 128
+        int gs128WithSeparator = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_GS1_128_SEPARATOR_ENABLED);
+        bindingView.swCode128Separator.setChecked(gs128WithSeparator == 1);
+
+        // GS1 DATABAR
+        int gsDatabarExpanded = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_RSS_EXPANDED_ENABLED);
+        bindingView.swGs1DatabarExpanded.setChecked(gsDatabarExpanded == 1);
+        int gsDatabarLimited = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_RSS_LIMITED_ENABLED);
+        bindingView.swGs1DatabarLimited.setChecked(gsDatabarLimited == 1);
+
+        // ITF25
+        int itf25CheckDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_I25_CHECK_DIGIT_MODE);
+        bindingView.spItf25CheckDigit.setSelection(itf25CheckDigitDef);
+        int itf25MaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_I25_MAX_LENGTH);
+        bindingView.etItf25MaxLength.setText(String.valueOf(itf25MaxLength));
+        int itf25MinLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_I25_MIN_LENGTH);
+        bindingView.etItf25MinLength.setText(String.valueOf(itf25MinLength));
+
         // Matrix25
         int checkDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_M25_CHECK_DIGIT_MODE);
         bindingView.spCheckDigit.setSelection(checkDigitDef);
+
+        // MSI
+        int msiCheckDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_MSI_CHECK_DIGIT_MODE);
+        bindingView.spMsiCheckDigit.setSelection(msiCheckDigitDef);
+        int msiMinLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_MSI_MIN_LENGTH);
+        bindingView.etMsiMinLength.setText(String.valueOf(msiMinLength));
+
+        // QRCode
+        int MQEnable = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_QR_ENABLED);
+        bindingView.swMqEnable.setChecked(MQEnable == 1);
+        int qrcodeMaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_QR_MAX_OUTPUT_LENGTH);
+        bindingView.etQrcodeMaxOutputLength.setText(String.valueOf(qrcodeMaxLength));
 
         // UPCA
         int upcCheckSumDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_CHECK_DIGIT_TRANSMIT);
@@ -138,6 +165,22 @@ public class BarcodeOptionsFragment extends BaseFragment {
         bindingView.swUpcSeparatorAddon.setChecked(upcSeparatorAddonDef == 1);
         int countryCodeDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_ADD_COUNTRY_CODE);
         bindingView.swUpcCountryCode.setChecked(countryCodeDef == 1);
+
+        // UPC-E
+        int upceExpend = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCE_EXPAND);
+        bindingView.swUpceExpand.setChecked(upceExpend == 1);
+        int upceCheckSumDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCE_CHECK_DIGIT_TRANSMIT);
+        bindingView.swUpceChecksum.setChecked(upceCheckSumDef == 1);
+        int upceNumberSystemDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCE_NUMBER_SYSTEM_TRANSMIT);
+        bindingView.swUpceNumberCheck.setChecked(upceNumberSystemDef == 1);
+        int upceTwoAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCE_2CHAR_ADDENDA_ENABLED);
+        bindingView.swUpce2addon.setChecked(upceTwoAddonDef == 1);
+        int upceFiveAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCE_5CHAR_ADDENDA_ENABLED);
+        bindingView.swUpce5addon.setChecked(upceFiveAddonDef == 1);
+        int upceRequiredAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCE_ADDENDA_REQUIRED);
+        bindingView.swUpceRequiredAddon.setChecked(upceRequiredAddonDef == 1);
+        int upceSeparatorAddonDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCE_ADDENDA_SEPARATOR);
+        bindingView.swUpceSeparatorAddon.setChecked(upceSeparatorAddonDef == 1);
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -191,6 +234,28 @@ public class BarcodeOptionsFragment extends BaseFragment {
             XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_C128_SEPARATOR_ENABLED, isChecked ? 1 : 0);
         } else if (buttonView.getId() == R.id.sw_codabar_transmit_char) {
             XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODABAR_START_STOP_TRANSMIT, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_gs1_128_separators) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_GS1_128_SEPARATOR_ENABLED, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_gs1_databar_expanded) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_RSS_EXPANDED_ENABLED, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_gs1_databar_limited) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_RSS_LIMITED_ENABLED, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_mq_enable) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_QR_ENABLED, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_upce_expand) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCE_EXPAND, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_upce_checksum) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCE_CHECK_DIGIT_TRANSMIT, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_upce_number_check) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCE_NUMBER_SYSTEM_TRANSMIT, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_upce_2addon) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCE_2CHAR_ADDENDA_ENABLED, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_upce_5addon) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCE_5CHAR_ADDENDA_ENABLED, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_upce_required_addon) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCE_ADDENDA_REQUIRED, isChecked ? 1 : 0);
+        } else if (buttonView.getId() == R.id.sw_upce_separator_addon) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_UPCE_ADDENDA_SEPARATOR, isChecked ? 1 : 0);
         }
     }
 
@@ -204,6 +269,10 @@ public class BarcodeOptionsFragment extends BaseFragment {
             XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_M25_CHECK_DIGIT_MODE, position);
         } else if (parent.getId() == R.id.sp_codabar_check_digit) {
             XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODABAR_CHECK_DIGIT_MODE, position);
+        } else if (parent.getId() == R.id.sp_itf25_check_digit) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_I25_CHECK_DIGIT_MODE, position);
+        } else if (parent.getId() == R.id.sp_msi_check_digit) {
+            XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_MSI_CHECK_DIGIT_MODE, position);
         }
     }
 
@@ -248,6 +317,18 @@ public class BarcodeOptionsFragment extends BaseFragment {
                     break;
                 case R.id.et_codabar_min_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODABAR_MIN_LENGTH, val.isEmpty() ? 4 : Integer.parseInt(val));
+                    break;
+                case R.id.et_itf25_max_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_I25_MAX_LENGTH, val.isEmpty() ? 127 : Integer.parseInt(val));
+                    break;
+                case R.id.et_itf25_min_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_I25_MIN_LENGTH, val.isEmpty() ? 2 : Integer.parseInt(val));
+                    break;
+                case R.id.et_msi_min_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_MSI_MIN_LENGTH, val.isEmpty() ? 4 : Integer.parseInt(val));
+                    break;
+                case R.id.et_qrcode_max_output_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_QR_MAX_OUTPUT_LENGTH, val.isEmpty() ? 0 : Integer.parseInt(val));
                     break;
                 default:
                     break;
