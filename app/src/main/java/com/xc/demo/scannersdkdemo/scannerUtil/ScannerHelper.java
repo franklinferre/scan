@@ -125,11 +125,12 @@ public class ScannerHelper implements ScannerResultSubject, ScannerSymResult {
         } else if (sdkVer.equals("1.1.0")) {
             return checkServiceVersionMatches(serviceVer, "1.3.1");
         } else if (sdkVer.equals("1.1.10")) {
-            return checkServiceVersionMatches(serviceVer, "1.3.40.2.2");
+            return serviceVer.equals("1.3.40.2.2");
         } else if (sdkVer.equals("1.1.11")) {
-            return checkServiceVersionMatches(serviceVer, "1.3.40.2.3");
+            return serviceVer.equals("1.3.40.2.3");
         } else if (sdkVer.equals("1.1.12") || sdkVer.equals("1.1.13")) {
-            return checkServiceVersionMatches(serviceVer, "1.3.40.2.4");
+            return serviceVer.equals("1.3.40.2.4")
+                    || checkServiceVersionMatches(serviceVer, "1.3.46.2");
         } else {
             Log.e(TAG, "DO NOT USE ANY SDK WITHOUT VERSION LISTED IN THE TABLE!!!");
             return false;
