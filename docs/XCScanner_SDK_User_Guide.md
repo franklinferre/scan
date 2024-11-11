@@ -202,6 +202,7 @@ All barcode types defined in the class BarcodeType.
         public static final String GS1_DATAMATRIX = "GS1DATAMATRIX";
         public static final String EAN8 = "EAN-8";
         public static final String EAN13 = "EAN-13";
+        // GS1 DATABAR and GS1 DataBar-14 both use this parameter
         public static final String GS1_DATABAR = "GS1_DATABAR";
         public static final String HANXIN = "HANXIN";
         public static final String HK25 = "HK25";

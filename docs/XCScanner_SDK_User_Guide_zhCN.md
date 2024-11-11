@@ -201,6 +201,7 @@
         public static final String GS1_DATAMATRIX = "GS1DATAMATRIX";
         public static final String EAN8 = "EAN-8";
         public static final String EAN13 = "EAN-13";
+        // GS1 DATABAR 和 GS1 DataBar-14 都是用这个参数
         public static final String GS1_DATABAR = "GS1_DATABAR";
         public static final String HANXIN = "HANXIN";
         public static final String HK25 = "HK25";
