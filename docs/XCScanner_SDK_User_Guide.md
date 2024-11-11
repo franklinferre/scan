@@ -202,7 +202,7 @@ All barcode types defined in the class BarcodeType.
         public static final String GS1_DATAMATRIX = "GS1DATAMATRIX";
         public static final String EAN8 = "EAN-8";
         public static final String EAN13 = "EAN-13";
-        // GS1 DATABAR and GS1 DataBar-14 both use this parameter
+        // GS1 DataBar Omnidirectional (formerly GS1 DataBar-14)
         public static final String GS1_DATABAR = "GS1_DATABAR";
         public static final String HANXIN = "HANXIN";
         public static final String HK25 = "HK25";
@@ -823,7 +823,7 @@ public class XCBarcodeTag {
     // 1:display;0:hide
     public static final int TAG_GS1_128_SEPARATOR_ENABLED    = 0x1A015004;
     
-    // GS1 DATABAR
+    // GS1 DATABAR(GS1 DataBar-14)
     // GS1 DataBar Limited
     // 1:enable;0:disable
     public static final int TAG_RSS_LIMITED_ENABLED          = 0x1A022002;
@@ -1055,7 +1055,7 @@ public class XCBarcodeTag {
     // 1:display;0:hide
     public static final int TAG_GS1_128_SEPARATOR_ENABLED    = 0x1A015004;
     
-    // GS1 DATABAR
+    // GS1 DATABAR(GS1 DataBar-14)
     // GS1 DataBar Limited
     // 1:enable;0:disable
     public static final int TAG_RSS_LIMITED_ENABLED          = 0x1A022002;

@@ -201,7 +201,7 @@
         public static final String GS1_DATAMATRIX = "GS1DATAMATRIX";
         public static final String EAN8 = "EAN-8";
         public static final String EAN13 = "EAN-13";
-        // GS1 DATABAR 和 GS1 DataBar-14 都是用这个参数
+        // GS1 DataBar（前身为 GS1 DataBar-14）
         public static final String GS1_DATABAR = "GS1_DATABAR";
         public static final String HANXIN = "HANXIN";
         public static final String HK25 = "HK25";
@@ -794,7 +794,7 @@ public class XCBarcodeTag {
     // 显示分隔符。1：显示；0：隐藏
     public static final int TAG_GS1_128_SEPARATOR_ENABLED    = 0x1A015004;
     
-    // GS1 DATABAR
+    // GS1 DATABAR（GS1 DataBar-14）
     // GS1 DataBar Limited。1：开启；0：关闭
     public static final int TAG_RSS_LIMITED_ENABLED          = 0x1A022002;
     // GS1 DataBar Expanded。1：开启；0：关闭
@@ -970,7 +970,7 @@ public class XCBarcodeTag {
     // 显示分隔符。1：显示；0：隐藏
     public static final int TAG_GS1_128_SEPARATOR_ENABLED    = 0x1A015004;
     
-    // GS1 DATABAR
+    // GS1 DATABAR（GS1 DataBar-14）
     // GS1 DataBar Limited。1：开启；0：关闭
     public static final int TAG_RSS_LIMITED_ENABLED          = 0x1A022002;
     // GS1 DataBar Expanded。1：开启；0：关闭
