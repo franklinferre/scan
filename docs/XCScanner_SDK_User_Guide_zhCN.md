@@ -22,6 +22,7 @@
 | 1.1.11  | 2024/10/10 | 增加获取/配置Code39、DATAMATRIX、EAN8条码属性接口。                       |
 | 1.1.12  | 2024/10/17 | 增加获取/配置code11、coded49、code93、code128、codeabar条码属性接口。       |
 | 1.1.13  | 2024/10/18 | 增加获取/配置GS1-128、GS1-DATABAR、ITF25、MSI、QRCode、UPCE条码属性接口。    |
+| 1.1.14  | 2024/11/21 | 增加设置扫码提示音接口。                                               |
 
 
 # 功能使用
@@ -1096,5 +1097,10 @@ XcBarcodeScanner.setScanTriggerMode(ScanTriggerMode.STOP_ON_RELEASE); //将扫�
 XcBarcodeScanner.setScanTriggerMode(ScanTriggerMode.STOP_ON_TIMEOUT); //将扫码触发模式配置成超时后停止
 ```
 
+## 设置扫码提示音量
 
+可通过此接口设置扫码音量，参数：0.0 - 1.0
 
+```java
+void setScanVolume(float volume)
+```

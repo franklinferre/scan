@@ -34,7 +34,8 @@ public class FunctionOptionsFragment extends BaseFragment implements View.OnClic
     private LinearLayout mLyBroadcastAction, mLyBroadcastKey;
     private TextView mTvBroadcastAction, mTvBroadcastKey;
 
-    private Spinner mSpSuccessNotification, mSpFailNotification;
+    private Spinner mSpSuccessNotification, mSpFailNotification, mSpNotificationVolume;
+
     private Switch mSwLedNotification;
 
     private Spinner mSpAimEnable, mSpIllumeEnable, mSpBrightness;
@@ -88,12 +89,26 @@ public class FunctionOptionsFragment extends BaseFragment implements View.OnClic
             Log.i(TAG, funName + ":: successNotification = " + successNotification[position]);
             // set success notification
             XcBarcodeScanner.setSuccessNotification(successNotification[position]);
+
+            Log.d("bo.li","sp_success_notification");
         } else if (parent.getId() == R.id.sp_fail_notification) {
             String[] failNotification = getResources().getStringArray(R.array.scan_notification_values);
             Log.i(TAG, funName + ":: failNotification = " + failNotification[position]);
             // set fail notification
             XcBarcodeScanner.setFailNotification(failNotification[position]);
-        } else if (parent.getId() == R.id.sp_aim_enable) {
+
+            Log.d("bo.li","sp_fail_notification" );
+
+        } else if (parent.getId() == R.id.scan_notification_volume) {
+            String[] notificationVolume = getResources().getStringArray(R.array.scan_notification_volume_entries);
+//            Log.d(TAG, funName + ":: setScanVolume = " + notificationVolume[position]);
+
+            int volume = Integer.parseInt(notificationVolume[position].replace("%", ""));
+            Log.d("bo.li","volume = " + volume / 100f);
+            XcBarcodeScanner.setScanVolume(volume / 100f);
+            Log.d("bo.li","scan_notification_volume" );
+
+        }else if (parent.getId() == R.id.sp_aim_enable) {
             int[] aimMode = getResources().getIntArray(R.array.aim_lights_values);
             Log.i(TAG, funName + ":: aimMode = " + aimMode[position]);
             // set aim mode
@@ -245,6 +260,12 @@ public class FunctionOptionsFragment extends BaseFragment implements View.OnClic
         mSpSuccessNotification.setOnItemSelectedListener(this);
         mSpFailNotification.setSelection(getSpPositionFromDefVal(R.array.scan_notification_values, DefaultOptions.DEFAULT_FAIL_NOTIFICATION_VAL));
         mSpFailNotification.setOnItemSelectedListener(this);
+        mSwLedNotification.setOnCheckedChangeListener(this);
+
+        mSpNotificationVolume = view.findViewById(R.id.scan_notification_volume);
+        mSpNotificationVolume.setSelection(getSpPositionFromDefVal(R.array.scan_notification_volume_entries, DefaultOptions.DEFAULT_NOTIFICATION_VOLUME_VAL));
+        mSpNotificationVolume.setOnItemSelectedListener(this);
+
         mSwLedNotification.setOnCheckedChangeListener(this);
         mSwLedNotification.setChecked(DefaultOptions.DEFAULT_LED_NOTIFICATION_VAL);
 

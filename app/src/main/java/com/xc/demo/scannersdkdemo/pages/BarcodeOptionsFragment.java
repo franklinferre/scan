@@ -17,7 +17,8 @@ import com.xc.demo.scannersdkdemo.BaseFragment;
 import com.xc.demo.scannersdkdemo.R;
 import com.xc.demo.scannersdkdemo.databinding.FragmentBarcodeOptionsBinding;
 import com.xcheng.scanner.BarcodeType;
-import com.xcheng.scanner.XCBarcodeTag;
+//import com.xcheng.scanner.XCBarcodeTag;
+import com.xc.demo.scannersdkdemo.XCBarcodeTag;
 import com.xcheng.scanner.XcBarcodeScanner;
 
 public class BarcodeOptionsFragment extends BaseFragment {
@@ -37,6 +38,7 @@ public class BarcodeOptionsFragment extends BaseFragment {
         // Code11
         boolean isCode11Enable = XcBarcodeScanner.isBarcodeTypeEnabled(BarcodeType.CODE11);
         bindingView.swCode11Enable.setChecked(isCode11Enable);
+
         int code11CheckDigitDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE11_CHECK_DIGIT_MODE);
         bindingView.spCode11CheckDigit.setSelection(code11CheckDigitDef);
         int code11MaxLengthDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_CODE11_MAX_LENGTH);

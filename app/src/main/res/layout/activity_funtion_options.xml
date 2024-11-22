@@ -195,6 +195,20 @@
                 android:entries="@array/scan_notification_entries" />
         </LinearLayout>
 
+        <LinearLayout style="@style/OptionItemLinearHStyle">
+
+            <TextView
+                style="@style/OptionItemTxtStyle"
+                android:text="@string/text_scan_notification_volume" />
+
+            <Spinner
+                android:id="@+id/scan_notification_volume"
+                style="@style/CommonSpinnerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/scan_notification_volume_entries" />
+        </LinearLayout>
+
         <View style="@style/DividerStyle" />
 
         <!-- 指示灯 -->

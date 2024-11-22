@@ -117,4 +117,6 @@
     <string name="text_mqr_enable">MicroQR支持</string>
     <string name="txt_upce">UPC-E</string>
     <string name="upce_expand">UPCE扩充</string>
+
+    <string name="text_scan_notification_volume">扫码提示音量</string>
 </resources>

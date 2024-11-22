@@ -1,6 +1,7 @@
 package com.xc.demo.scannersdkdemo;
 
-import com.xcheng.scanner.ScanTriggerMode;
+//import com.xcheng.scanner.ScanTriggerMode;
+import com.xc.demo.scannersdkdemo.XCBarcodeTag;
 
 public class DefaultOptions {
     public static final int DEFAULT_SCAN_TIMEOUT_VAL = 2; // 2 seconds
@@ -26,6 +27,8 @@ public class DefaultOptions {
     public static final String DEFAULT_SUCCESS_NOTIFICATION_VAL = "Sound";
 
     public static final String DEFAULT_FAIL_NOTIFICATION_VAL = "Mute";
+
+    public static final String DEFAULT_NOTIFICATION_VOLUME_VAL = "100%";
 
     public static final Boolean DEFAULT_LED_NOTIFICATION_VAL = true;
 

@@ -34,7 +34,8 @@ import com.xc.demo.scannersdkdemo.tools.AlertDialogUtils;
 import com.xc.demo.scannersdkdemo.tools.PictureDialog;
 import com.xc.demo.scannersdkdemo.tools.Utils;
 import com.xcheng.scanner.LicenseState;
-import com.xcheng.scanner.ScanTriggerMode;
+//import com.xcheng.scanner.ScanTriggerMode;
+import com.xc.demo.scannersdkdemo.ScanTriggerMode;
 import com.xcheng.scanner.XcBarcodeScanner;
 
 import java.io.ByteArrayOutputStream;
