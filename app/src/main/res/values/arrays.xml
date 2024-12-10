@@ -256,4 +256,17 @@
         <item>80%</item>
         <item>100%</item>
     </string-array>
+
+    <string-array name="data_matrix_setting_entries" translatable="false">
+        <item>Standard Only </item>
+        <item>Inverse Mode</item>
+        <item>Auto Detection</item>
+    </string-array>
+
+    <string-array name="data_matrix_setting_value" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

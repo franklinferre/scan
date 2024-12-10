@@ -117,5 +117,7 @@
     <string name="txt_upce">UPC-E</string>
     <string name="upce_expand">UPCE expansion</string>
 
-    <string name="text_scan_notification_volume">Scannner notification Volume</string>
+    <string name="text_scan_notification_volume">Scanning prompts volume</string>
+
+    <string name="text_datamatrix_scan_type">Code type</string>
 </resources>

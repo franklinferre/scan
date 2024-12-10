@@ -355,6 +355,22 @@
                     android:onEditorAction="@{fragment::onEditorAction}" />
             </LinearLayout>
 
+
+            <LinearLayout style="@style/OptionItemLinearHStyle">
+
+                <TextView
+                    style="@style/OptionItemTxtStyle"
+                    android:text="@string/text_datamatrix_scan_type" />
+
+                <Spinner
+                    android:id="@+id/pref_data_matrix_setting"
+                    style="@style/CommonSpinnerStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/data_matrix_setting_entries"
+                    android:onItemSelected="@{fragment::onItemSelected}" />
+            </LinearLayout>
+
             <!--EAN8-->
             <TextView
                 style="@style/OptionTitleStyle"

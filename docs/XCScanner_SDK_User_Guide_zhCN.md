@@ -23,7 +23,7 @@
 | 1.1.12  | 2024/10/17 | 增加获取/配置code11、coded49、code93、code128、codeabar条码属性接口。       |
 | 1.1.13  | 2024/10/18 | 增加获取/配置GS1-128、GS1-DATABAR、ITF25、MSI、QRCode、UPCE条码属性接口。    |
 | 1.1.14  | 2024/11/21 | 增加设置扫码提示音接口。                                               |
-
+| 1.1.15  | 2024/12/10 | 增加Datamatrix码制可以切换和单独控制。                                   |
 
 # 功能使用
 
@@ -1103,4 +1103,38 @@ XcBarcodeScanner.setScanTriggerMode(ScanTriggerMode.STOP_ON_TIMEOUT); //将扫�
 
 ```java
 void setScanVolume(float volume)
+```
+
+
+## 设置和获取Datamatrix码制当前所应用子类型
+
+可以通过该接口设置Datamatrix码制的当前类型（仅标准码、仅反色码、全部启用）。
+
+```
+<string-array name="matrix_mode_array" translatable="false">
+    <item>仅标准码</item>
+    <item>仅反色码</item>
+    <item>全部开启</item>
+</string-array>
+
+<string-array name="matrix_mode_value" translatable="false">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+</string-array>
+    
+// 获取DataMatrix类型的码制
+int getDataMatrixMode();
+
+// 设置DataMatrix类型的码制
+// 支持参数：0：仅标准码、1：仅反色码、2：全部启用
+void setDataMatrixMode(int trye);
+```
+
+示例代码：
+
+```
+int matrixMode = XcBarcodeScanner.getDataMatrixMode();
+
+XcBarcodeScanner.setDataMatrixMode(position);
 ```
