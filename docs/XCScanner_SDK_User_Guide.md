@@ -23,7 +23,8 @@
 | 1.1.12      | 2024/10/17 | Add API to support set/get properties for the code11/coded49/code93/code128/codeabar symbology                                                                                                  |
 | 1.1.13      | 2024/10/18 | Add API to support set/get properties for the GS1-128/GS1-DATABAR/ITF25/MSI/QRCode/UPCE symbology                                                                                               |
 | 1.1.14      | 2024/11/21 | Add API to set the prompt tone interface for code scanning                                                                                                                                      |
-| 1.1.15      | 2024/12/10 | Add API to Datamatrix code system can be switched and controlled separately.                                                                                                                    |   
+| 1.1.15      | 2024/12/10 | Add API to Datamatrix code system can be switched and controlled separately.                                                                                                                    |
+| 1.1.16      | 2024/12/13 | Add Datamatrix and QrCode maximum length function to replace the maximum output length function.                                                                                                |
 
 # Basic function
 
@@ -785,6 +786,9 @@ public class XCBarcodeTag {
     // Max out length (0: no limit).
     // An integer greater than or equal to 0, where 0 indicates no restriction.
     public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+    // Maximum length(1-3116).
+    // The range of values is integers from 1 to 3116.
+    public static final int TAG_DATAMATRIX_MAX_LENGTH        = 0x1A029003;
 
     // EAN-8
     // Transmit check digit.
@@ -863,6 +867,9 @@ public class XCBarcodeTag {
     public static final int TAG_QR_ENABLED                   = 0x1A02A001;
     // Max out length (0: no limit).
     public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
+    // Maximum length(0-7089).
+    // The range of values is integers from 0 to 7089.
+    public static final int TAG_QR_MAX_LENGTH                = 0x1A02A003;
 
     // UPC-A
     // Transmit check digit.
@@ -1017,6 +1024,9 @@ public class XCBarcodeTag {
     // Max out length (0: no limit).
     // An integer greater than or equal to 0, where 0 indicates no restriction.
     public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+    // Maximum length(1-3116).
+    // The range of values is integers from 1 to 3116.
+    public static final int TAG_DATAMATRIX_MAX_LENGTH        = 0x1A029003;
 
     // EAN-8
     // Transmit check digit.
@@ -1095,6 +1105,9 @@ public class XCBarcodeTag {
     public static final int TAG_QR_ENABLED                   = 0x1A02A001;
     // Max out length (0: no limit).
     public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
+    // Maximum length(0-7089).
+    // The range of values is integers from 0 to 7089.
+    public static final int TAG_QR_MAX_LENGTH                = 0x1A02A003;
 
     // UPC-A
     // Transmit check digit.

@@ -91,8 +91,10 @@ public class BarcodeOptionsFragment extends BaseFragment {
         // DataMatrix
         int withSeparators = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_DATAMATRIX_SEPARATOR_ENABLED);
         bindingView.swWithSeparators.setChecked(withSeparators == 1);
-        int outputMaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_DATAMATRIX_OUTPUT_MAX_LENGTH);
-        bindingView.etOutputMaxLength.setText(String.valueOf(outputMaxLength));
+/*        int outputMaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_DATAMATRIX_OUTPUT_MAX_LENGTH);
+        bindingView.etOutputMaxLength.setText(String.valueOf(outputMaxLength));*/
+        int dataMatrixMaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_DATAMATRIX_MAX_LENGTH);
+        bindingView.etMaxLength.setText(String.valueOf(dataMatrixMaxLength));
         int matrixMode = XcBarcodeScanner.getDataMatrixMode();
         bindingView.prefDataMatrixSetting.setSelection(matrixMode);
 
@@ -151,8 +153,10 @@ public class BarcodeOptionsFragment extends BaseFragment {
         // QRCode
         int MQEnable = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_QR_ENABLED);
         bindingView.swMqEnable.setChecked(MQEnable == 1);
-        int qrcodeMaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_QR_MAX_OUTPUT_LENGTH);
-        bindingView.etQrcodeMaxOutputLength.setText(String.valueOf(qrcodeMaxLength));
+/*        int qrcodeMaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_QR_MAX_OUTPUT_LENGTH);
+        bindingView.etQrcodeMaxOutputLength.setText(String.valueOf(qrcodeMaxLength));*/
+        int qrcodeMaxLength = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_QR_MAX_LENGTH);
+        bindingView.etQrcodeMaxLength.setText(String.valueOf(qrcodeMaxLength));
 
         // UPCA
         int upcCheckSumDef = XcBarcodeScanner.getDecoderTagValue(XCBarcodeTag.TAG_UPCA_CHECK_DIGIT_TRANSMIT);
@@ -318,8 +322,11 @@ public class BarcodeOptionsFragment extends BaseFragment {
                 case R.id.et_code128_min_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODE128_MIN_LENGTH, val.isEmpty() ? 1 : Integer.parseInt(val));
                     break;
-                case R.id.et_output_max_length:
+/*                case R.id.et_output_max_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_DATAMATRIX_OUTPUT_MAX_LENGTH, val.isEmpty() ? 0 : Integer.parseInt(val));
+                    break;*/
+                case R.id.et_max_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_DATAMATRIX_MAX_LENGTH, val.isEmpty() ? 3116 : Integer.parseInt(val));
                     break;
                 case R.id.et_codabar_min_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_CODABAR_MIN_LENGTH, val.isEmpty() ? 4 : Integer.parseInt(val));
@@ -332,9 +339,12 @@ public class BarcodeOptionsFragment extends BaseFragment {
                     break;
                 case R.id.et_msi_min_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_MSI_MIN_LENGTH, val.isEmpty() ? 4 : Integer.parseInt(val));
-                    break;
+/*                    break;
                 case R.id.et_qrcode_max_output_length:
                     XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_QR_MAX_OUTPUT_LENGTH, val.isEmpty() ? 0 : Integer.parseInt(val));
+                    break;*/
+                case R.id.et_qrcode_max_length:
+                    XcBarcodeScanner.setDecoderTag(XCBarcodeTag.TAG_QR_MAX_LENGTH, val.isEmpty() ? 7089 : Integer.parseInt(val));
                     break;
                 default:
                     break;

@@ -31,6 +31,7 @@ public class XCBarcodeTag {
     // DataMatrix
     public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
     public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+    public static final int TAG_DATAMATRIX_MAX_LENGTH        = 0x1A029003;
     // EAN-8
     public static final int TAG_EAN8_CHECK_DIGIT_TRANSMIT    = 0x1A012002;
     public static final int TAG_EAN8_2CHAR_ADDENDA_ENABLED   = 0x1A012003;
@@ -60,6 +61,7 @@ public class XCBarcodeTag {
     // QRCode
     public static final int TAG_QR_ENABLED                   = 0x1A02A001;
     public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
+    public static final int TAG_QR_MAX_LENGTH                = 0x1A02A003;
     // UPC-A
     public static final int TAG_UPCA_CHECK_DIGIT_TRANSMIT    = 0x1A010002;
     public static final int TAG_UPCA_NUMBER_SYSTEM_TRANSMIT  = 0x1A010003;

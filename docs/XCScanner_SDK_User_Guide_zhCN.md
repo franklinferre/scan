@@ -24,6 +24,7 @@
 | 1.1.13  | 2024/10/18 | 增加获取/配置GS1-128、GS1-DATABAR、ITF25、MSI、QRCode、UPCE条码属性接口。    |
 | 1.1.14  | 2024/11/21 | 增加设置扫码提示音接口。                                               |
 | 1.1.15  | 2024/12/10 | 增加Datamatrix码制可以切换和单独控制。                                   |
+| 1.1.16  | 2024/12/13 | 增加Datamatrix和QrCode码制最大长度功能来替换最大输出长度功能                     |
 
 # 功能使用
 
@@ -766,6 +767,8 @@ public class XCBarcodeTag {
     public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
     // 最大输出长度（0：不限制）。大于等于0的整数，0表示不限制。
     public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+    // 最大长度（1-3116）。取值范围为1-3116的整数。
+    public static final int TAG_DATAMATRIX_MAX_LENGTH        = 0x1A029003;
 
     // EAN-8
     // 输出校验码。1：开启；0：关闭
@@ -825,6 +828,8 @@ public class XCBarcodeTag {
     public static final int TAG_QR_ENABLED                   = 0x1A02A001;
     // 最大输出长度（0：不限制）。
     public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
+    // 最大长度（0-7089）。取值范围为0-7089的整数。
+    public static final int TAG_QR_MAX_LENGTH                = 0x1A02A003;
 
     // UPC-A
     // 输出校验码。1：开启；0：关闭 
@@ -942,6 +947,8 @@ public class XCBarcodeTag {
     public static final int TAG_DATAMATRIX_SEPARATOR_ENABLED = 0x1A029004;
     // 最大输出长度（0：不限制）。大于等于0的整数，0表示不限制。
     public static final int TAG_DATAMATRIX_OUTPUT_MAX_LENGTH = 0x1A029005;
+    // 最大长度（1-3116）。取值范围为1-3116的整数。
+    public static final int TAG_DATAMATRIX_MAX_LENGTH        = 0x1A029003;
 
     // EAN-8
     // 输出校验码。1：开启；0：关闭
@@ -1001,6 +1008,8 @@ public class XCBarcodeTag {
     public static final int TAG_QR_ENABLED                   = 0x1A02A001;
     // 最大输出长度（0：不限制）。
     public static final int TAG_QR_MAX_OUTPUT_LENGTH         = 0x1A02A004;
+    // 最大长度（0-7089）。取值范围为0-7089的整数。
+    public static final int TAG_QR_MAX_LENGTH                = 0x1A02A003;
 
     // UPC-A
     // 输出校验码。1：开启；0：关闭 

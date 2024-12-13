@@ -120,4 +120,6 @@
     <string name="text_scan_notification_volume">Scanning prompts volume</string>
 
     <string name="text_datamatrix_scan_type">Code type</string>
+    <string name="max_length_tip_1_3116">Maximum length(0-3116)</string>
+    <string name="max_length_tip_0_7089">Maximum length(0-7089)</string>
 </resources>

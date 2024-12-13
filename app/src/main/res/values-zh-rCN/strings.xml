@@ -121,4 +121,6 @@
     <string name="text_scan_notification_volume">扫码提示音量</string>
 
     <string name="text_datamatrix_scan_type">码制类型</string>
+    <string name="max_length_tip_1_3116">最大长度（0-3116）</string>
+    <string name="max_length_tip_0_7089">最大长度（0-7089）</string>
 </resources>

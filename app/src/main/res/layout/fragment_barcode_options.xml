@@ -346,10 +346,15 @@
                     style="@style/OptionItemTxtStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_max_output_length" />
+                    android:text="@string/max_length_tip_1_3116" />
 
-                <EditText
+<!--                <EditText
                     android:id="@+id/et_output_max_length"
+                    style="@style/OptionItemEditNumberStyle"
+                    android:hint="0"
+                    android:onEditorAction="@{fragment::onEditorAction}" />-->
+                <EditText
+                    android:id="@+id/et_max_length"
                     style="@style/OptionItemEditNumberStyle"
                     android:hint="0"
                     android:onEditorAction="@{fragment::onEditorAction}" />
@@ -617,10 +622,15 @@
                     style="@style/OptionItemTxtStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_max_output_length" />
+                    android:text="@string/max_length_tip_0_7089" />
 
-                <EditText
+<!--                <EditText
                     android:id="@+id/et_qrcode_max_output_length"
+                    style="@style/OptionItemEditNumberStyle"
+                    android:hint="0"
+                    android:onEditorAction="@{fragment::onEditorAction}" />-->
+                <EditText
+                    android:id="@+id/et_qrcode_max_length"
                     style="@style/OptionItemEditNumberStyle"
                     android:hint="0"
                     android:onEditorAction="@{fragment::onEditorAction}" />
